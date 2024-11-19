@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 
 public class Level {
-    private static Gson gson=new Gson();
-    private static JsonReader reader;
-    private
+	private static Gson gson = new Gson();
+	private static JsonReader reader;
 }
