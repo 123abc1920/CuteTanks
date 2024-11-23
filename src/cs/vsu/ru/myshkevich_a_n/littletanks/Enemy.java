@@ -3,8 +3,6 @@ package cs.vsu.ru.myshkevich_a_n.littletanks;
 import java.util.Random;
 
 public class Enemy extends Tank {
-	private char[] moves = { 'w', 'a', 'd', 's' };
-
 	public Enemy(int row, int col, Target target) {
 		this.setCol(col);
 		this.setRow(row);
@@ -18,22 +16,9 @@ public class Enemy extends Tank {
 
 	public void move(char c) {
 		Random rnd = new Random();
-		c = moves[rnd.nextInt(moves.length)];
-		if (c == 'w') {
-			this.setTarget(Target.TOP);
-			this.setRow(this.getRow() - 1);
-		}
-		if (c == 's') {
-			this.setTarget(Target.BOTTOM);
-			this.setRow(this.getRow() + 1);
-		}
-		if (c == 'a') {
-			this.setTarget(Target.LEFT);
-			this.setCol(this.getCol() - 1);
-		}
-		if (c == 'd') {
-			this.setTarget(Target.RIGHT);
-			this.setCol(this.getCol() + 1);
-		}
+		c = Global.TARGETS.get(rnd.nextInt(Global.TARGETS.size()));
+		this.setTarget(Target.values()[Global.TARGETS.indexOf(c)]);
+		this.setRow(this.getRow() + this.getTarget().changeRowsCols()[0]);
+		this.setCol(this.getCol() + this.getTarget().changeRowsCols()[1]);
 	}
 }

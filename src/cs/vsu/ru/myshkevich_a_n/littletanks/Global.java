@@ -1,5 +1,8 @@
 package cs.vsu.ru.myshkevich_a_n.littletanks;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Global {
 	public static final char wallSymbol = '#';
 	public static final char waterSymbol = '~';
@@ -11,6 +14,8 @@ public class Global {
 
 	private static final char[] enemySymbols = { '^', 'v', '<', '>' };
 	private static final char[] playerSymbols = { 'n', 'u', '(', ')' };
+	
+	protected static final List<Character> TARGETS = Arrays.asList('a', 'd', 'w', 's');
 
 	public static char getUpPlayerSymbol() {
 		return playerSymbols[0];

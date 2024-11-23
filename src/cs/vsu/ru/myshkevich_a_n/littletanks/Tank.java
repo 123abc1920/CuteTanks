@@ -1,5 +1,8 @@
 package cs.vsu.ru.myshkevich_a_n.littletanks;
 
+import java.util.Arrays;
+import java.util.List;
+
 public abstract class Tank {
 	private char symbolUp;
 	private char symbolLeft;

@@ -1,8 +1,30 @@
 package cs.vsu.ru.myshkevich_a_n.littletanks;
 
 public enum Target {
-	LEFT("left"), RIGHT("right"), TOP("top"), BOTTOM("bottom");
+	LEFT {
+		@Override
+		public int[] changeRowsCols() {
+			return new int[] { 0, -1 };
+		}
+	},
+	RIGHT {
+		@Override
+		public int[] changeRowsCols() {
+			return new int[] { 0, 1 };
+		}
+	},
+	TOP {
+		@Override
+		public int[] changeRowsCols() {
+			return new int[] { -1, 0 };
+		}
+	},
+	BOTTOM {
+		@Override
+		public int[] changeRowsCols() {
+			return new int[] { 1, 0 };
+		}
+	};
 
-	Target(String string) {
-	}
+	public abstract int[] changeRowsCols();
 }

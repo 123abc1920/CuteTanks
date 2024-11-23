@@ -14,21 +14,8 @@ public class Player extends Tank {
 	}
 
 	public void move(char c) {
-		if (c == 'w') {
-			this.setTarget(Target.TOP);
-			this.setRow(this.getRow() - 1);
-		}
-		if (c == 's') {
-			this.setTarget(Target.BOTTOM);
-			this.setRow(this.getRow() + 1);
-		}
-		if (c == 'a') {
-			this.setTarget(Target.LEFT);
-			this.setCol(this.getCol() - 1);
-		}
-		if (c == 'd') {
-			this.setTarget(Target.RIGHT);
-			this.setCol(this.getCol() + 1);
-		}
+		this.setTarget(Target.values()[Global.TARGETS.indexOf(c)]);
+		this.setRow(this.getRow() + this.getTarget().changeRowsCols()[0]);
+		this.setCol(this.getCol() + this.getTarget().changeRowsCols()[1]);
 	}
 }

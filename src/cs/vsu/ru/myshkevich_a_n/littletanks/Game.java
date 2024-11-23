@@ -37,10 +37,10 @@ public class Game {
 			p.move(d);
 			world.getCell(p.getRow(), p.getCol()).setTank(p);
 		}
-		for (Tank e : enemies) {
+		/*for (Tank e : enemies) {
 			world.getCell(e.getRow(), e.getCol()).setTank(null);
 			e.move('a');
 			world.getCell(e.getRow(), e.getCol()).setTank(e);
-		}
+		}*/
 	}
 }
