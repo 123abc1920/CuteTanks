@@ -51,6 +51,18 @@ public class Tank {
 	}
 
 	public char getSymbol() {
+		if (this.target == Target.TOP) {
+			return this.getSymbolUp();
+		}
+		if (this.target == Target.BOTTOM) {
+			return this.getSymbolDown();
+		}
+		if (this.target == Target.LEFT) {
+			return this.getSymbolLeft();
+		}
+		if (this.target == Target.RIGHT) {
+			return this.getSymbolRight();
+		}
 		return 'u';
 	}
 

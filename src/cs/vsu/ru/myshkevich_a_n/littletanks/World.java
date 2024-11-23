@@ -7,19 +7,9 @@ import java.util.Scanner;
 
 public class World {
 	private Cell[][] board = new Cell[13][13];
-	private List<Enemy> enemies = new ArrayList<>();
-	private List<Player> players = new ArrayList<>();
-	private List<Water> waters = new ArrayList<>();
-	private List<Tree> trees = new ArrayList<>();
-	private List<Wall> walls = new ArrayList<>();
 
-	private Level lvl;
-
-	public World() {
+	public World(Level lvl) {
 		CellFabric cellFabric = new CellFabric();
-
-		Scanner s = new Scanner(System.in);
-		lvl = new Level(s.nextLine());
 
 		for (int i = 0; i < 13; i++) {
 			for (int j = 0; j < 13; j++) {
@@ -36,4 +26,16 @@ public class World {
 	public void setCell(int row, int col, Cell cell) {
 		this.board[row][col] = cell;
 	}
+
+	public Tank spawnEnemy(boolean isEnemy) {
+		if (isEnemy) {
+			Enemy enemy = new Enemy(0, 6, Target.BOTTOM);
+			this.board[0][6].setTank(enemy);
+			return enemy;
+		}
+		Player player = new Player(12, 6, Target.TOP);
+		this.board[12][6].setTank(player);
+		return player;
+	}
+
 }

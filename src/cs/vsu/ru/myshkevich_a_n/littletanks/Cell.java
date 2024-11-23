@@ -37,6 +37,10 @@ public abstract class Cell {
 		this.row = row;
 	}
 
+	public void setTank(Tank tank) {
+		this.tank = tank;
+	}
+
 	public Tank getTank() {
 		return tank;
 	}
