@@ -13,7 +13,6 @@ public class Player extends Tank {
 		this.setSymbolRight(Global.getRightPlayerSymbol());
 	}
 
-	@Override
 	public void move(char c) {
 		if (c == 'w') {
 			this.setTarget(Target.TOP);

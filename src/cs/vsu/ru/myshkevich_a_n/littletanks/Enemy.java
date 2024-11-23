@@ -1,6 +1,9 @@
 package cs.vsu.ru.myshkevich_a_n.littletanks;
 
+import java.util.Random;
+
 public class Enemy extends Tank {
+	private char[] moves = { 'w', 'a', 'd', 's' };
 
 	public Enemy(int row, int col, Target target) {
 		this.setCol(col);
@@ -12,10 +15,25 @@ public class Enemy extends Tank {
 		this.setSymbolLeft(Global.getLeftEnemySymbol());
 		this.setSymbolRight(Global.getRightEnemySymbol());
 	}
-	
-	@Override
+
 	public void move(char c) {
-		// TODO Auto-generated method stub
-		
+		Random rnd = new Random();
+		c = moves[rnd.nextInt(moves.length)];
+		if (c == 'w') {
+			this.setTarget(Target.TOP);
+			this.setRow(this.getRow() - 1);
+		}
+		if (c == 's') {
+			this.setTarget(Target.BOTTOM);
+			this.setRow(this.getRow() + 1);
+		}
+		if (c == 'a') {
+			this.setTarget(Target.LEFT);
+			this.setCol(this.getCol() - 1);
+		}
+		if (c == 'd') {
+			this.setTarget(Target.RIGHT);
+			this.setCol(this.getCol() + 1);
+		}
 	}
 }
