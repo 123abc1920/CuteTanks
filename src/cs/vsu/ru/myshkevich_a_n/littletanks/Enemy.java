@@ -7,9 +7,9 @@ public class Enemy extends Tank {
 		this.setRow(row);
 		this.setTarget(target);
 
-		this.setSymbolUp('^');
-		this.setSymbolDown('v');
-		this.setSymbolLeft('<');
-		this.setSymbolRight('>');
+		this.setSymbolUp(Global.getUpEnemySymbol());
+		this.setSymbolDown(Global.getDownEnemySymbol());
+		this.setSymbolLeft(Global.getLeftEnemySymbol());
+		this.setSymbolRight(Global.getRightEnemySymbol());
 	}
 }

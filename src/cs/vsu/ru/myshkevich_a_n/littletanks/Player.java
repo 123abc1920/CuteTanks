@@ -7,9 +7,9 @@ public class Player extends Tank {
 		this.setRow(row);
 		this.setTarget(target);
 
-		this.setSymbolUp('n');
-		this.setSymbolDown('u');
-		this.setSymbolLeft('(');
-		this.setSymbolRight(')');
+		this.setSymbolUp(Global.getUpPlayerSymbol());
+		this.setSymbolDown(Global.getDownPlayerSymbol());
+		this.setSymbolLeft(Global.getLeftPlayerSymbol());
+		this.setSymbolRight(Global.getRightPlayerSymbol());
 	}
 }

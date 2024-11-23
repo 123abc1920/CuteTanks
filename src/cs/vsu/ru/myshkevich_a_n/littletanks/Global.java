@@ -6,6 +6,8 @@ public class Global {
 	public static char treeSymbol = '@';
 	public static char flagSymbol = '$';
 	public static char spawnerSymbol = 'X';
+	public static char emptySymbol = '.';
+	public static char coreSymbol = 'O';
 
 	private static char[] enemySymbols = { '^', 'v', '>', '<' };
 	private static char[] playerSymbols = { 'n', 'u', ')', '(' };

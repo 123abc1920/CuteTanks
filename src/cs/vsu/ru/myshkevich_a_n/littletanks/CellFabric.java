@@ -6,15 +6,27 @@ import java.util.List;
 import java.util.Map;
 
 public class CellFabric {
+	private class AbstractCellFactory {
+		Cell c;
+
+		public AbstractCellFactory(Cell c) {
+			this.c = c;
+		}
+
+		public Cell create() {
+			return c;
+		}
+	}
+
 	private Map<Character, AbstractCellFactory> types = new HashMap<>();
 
 	public CellFabric() {
-		types.put('~', new AbstractCellFactory(new Water()));
-		types.put('@', new AbstractCellFactory(new Tree()));
-		types.put('.', new AbstractCellFactory(new Empty()));
-		types.put('#', new AbstractCellFactory(new Wall()));
-		types.put('$', new AbstractCellFactory(new Flag()));
-		types.put('X', new AbstractCellFactory(new Spawner()));
+		types.put(Global.waterSymbol, new AbstractCellFactory(new Water()));
+		types.put(Global.treeSymbol, new AbstractCellFactory(new Tree()));
+		types.put(Global.emptySymbol, new AbstractCellFactory(new Empty()));
+		types.put(Global.wallSymbol, new AbstractCellFactory(new Wall()));
+		types.put(Global.flagSymbol, new AbstractCellFactory(new Flag()));
+		types.put(Global.spawnerSymbol, new AbstractCellFactory(new Spawner()));
 	}
 
 	public Cell getCell(char c) {
