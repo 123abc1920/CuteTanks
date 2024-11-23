@@ -32,4 +32,22 @@ public class CellFabric {
 	public Cell getCell(char c) {
 		return types.get(c).create();
 	}
+
+	public Cell createCell(char c) {
+		switch (c) {
+		case (Global.emptySymbol):
+			return new Empty();
+		case (Global.flagSymbol):
+			return new Flag();
+		case (Global.spawnerSymbol):
+			return new Spawner();
+		case (Global.wallSymbol):
+			return new Wall();
+		case (Global.waterSymbol):
+			return new Water();
+		case (Global.treeSymbol):
+			return new Tree();
+		}
+		return null;
+	}
 }

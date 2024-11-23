@@ -13,7 +13,7 @@ public class World {
 
 		for (int i = 0; i < 13; i++) {
 			for (int j = 0; j < 13; j++) {
-				this.board[i][j] = cellFabric.getCell(lvl.getCell(i, j));
+				this.board[i][j] = cellFabric.createCell(lvl.getCell(i, j));
 				this.board[i][j].setRowCol(i, j);
 			}
 		}

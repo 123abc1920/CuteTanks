@@ -8,5 +8,8 @@ public class Drawing {
 			}
 			System.out.println();
 		}
+
+		game.move();
+		draw(game);
 	}
 }

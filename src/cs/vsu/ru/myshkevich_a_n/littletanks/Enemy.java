@@ -12,4 +12,10 @@ public class Enemy extends Tank {
 		this.setSymbolLeft(Global.getLeftEnemySymbol());
 		this.setSymbolRight(Global.getRightEnemySymbol());
 	}
+	
+	@Override
+	public void move(char c) {
+		// TODO Auto-generated method stub
+		
+	}
 }

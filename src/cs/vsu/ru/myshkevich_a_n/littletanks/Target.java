@@ -1,8 +1,8 @@
 package cs.vsu.ru.myshkevich_a_n.littletanks;
 
 public enum Target {
-    RIGHT,
-    LEFT,
-    TOP,
-    BOTTOM
+	LEFT("left"), RIGHT("right"), TOP("top"), BOTTOM("bottom");
+
+	Target(String string) {
+	}
 }

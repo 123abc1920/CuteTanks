@@ -1,16 +1,16 @@
 package cs.vsu.ru.myshkevich_a_n.littletanks;
 
 public class Global {
-	public static char wallSymbol = '#';
-	public static char waterSymbol = '~';
-	public static char treeSymbol = '@';
-	public static char flagSymbol = '$';
-	public static char spawnerSymbol = 'X';
-	public static char emptySymbol = '.';
-	public static char coreSymbol = 'O';
+	public static final char wallSymbol = '#';
+	public static final char waterSymbol = '~';
+	public static final char treeSymbol = '@';
+	public static final char flagSymbol = '$';
+	public static final char spawnerSymbol = 'X';
+	public static final char emptySymbol = '.';
+	public static final char coreSymbol = 'O';
 
-	private static char[] enemySymbols = { '^', 'v', '>', '<' };
-	private static char[] playerSymbols = { 'n', 'u', ')', '(' };
+	private static final char[] enemySymbols = { '^', 'v', '<', '>' };
+	private static final char[] playerSymbols = { 'n', 'u', '(', ')' };
 
 	public static char getUpPlayerSymbol() {
 		return playerSymbols[0];

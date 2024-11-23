@@ -1,6 +1,6 @@
 package cs.vsu.ru.myshkevich_a_n.littletanks;
 
-public class Tank {
+public abstract class Tank {
 	private char symbolUp;
 	private char symbolLeft;
 	private char symbolRight;
@@ -57,10 +57,10 @@ public class Tank {
 		if (this.target == Target.BOTTOM) {
 			return this.getSymbolDown();
 		}
-		if (this.target == Target.LEFT) {
+		if (this.target == Target.RIGHT) {
 			return this.getSymbolLeft();
 		}
-		if (this.target == Target.RIGHT) {
+		if (this.target == Target.LEFT) {
 			return this.getSymbolRight();
 		}
 		return 'u';
@@ -81,4 +81,6 @@ public class Tank {
 	public void setRow(int row) {
 		this.row = row;
 	}
+
+	public abstract void move(char c);
 }

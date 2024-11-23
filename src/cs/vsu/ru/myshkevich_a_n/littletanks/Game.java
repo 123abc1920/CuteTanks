@@ -10,9 +10,9 @@ public class Game {
 	private int score;
 	private List<Tank> players = new ArrayList<>();
 	private List<Tank> enemies = new ArrayList<>();
+	private Scanner s = new Scanner(System.in);
 
 	public Game() {
-		Scanner s = new Scanner(System.in);
 		lvl = new Level(s.nextLine());
 		world = new World(lvl);
 		enemies.add(world.spawnEnemy(true));
@@ -25,5 +25,17 @@ public class Game {
 
 	public void setWorld(World world) {
 		this.world = world;
+	}
+
+	public void move() {
+		for (Tank p : players) {
+			char d = s.nextLine().charAt(0);
+			if (d == 'q') {
+				System.exit(0);
+			}
+			world.getCell(p.getRow(), p.getCol()).setTank(null);
+			p.move(d);
+			world.getCell(p.getRow(), p.getCol()).setTank(p);
+		}
 	}
 }

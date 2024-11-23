@@ -12,4 +12,24 @@ public class Player extends Tank {
 		this.setSymbolLeft(Global.getLeftPlayerSymbol());
 		this.setSymbolRight(Global.getRightPlayerSymbol());
 	}
+
+	@Override
+	public void move(char c) {
+		if (c == 'w') {
+			this.setTarget(Target.TOP);
+			this.setRow(this.getRow() - 1);
+		}
+		if (c == 's') {
+			this.setTarget(Target.BOTTOM);
+			this.setRow(this.getRow() + 1);
+		}
+		if (c == 'a') {
+			this.setTarget(Target.LEFT);
+			this.setCol(this.getCol() - 1);
+		}
+		if (c == 'd') {
+			this.setTarget(Target.RIGHT);
+			this.setCol(this.getCol() + 1);
+		}
+	}
 }
