@@ -14,8 +14,8 @@ public class Global {
 
 	private static final char[] enemySymbols = { '^', 'v', '<', '>' };
 	private static final char[] playerSymbols = { 'n', 'u', '(', ')' };
-	
-	protected static final List<Character> TARGETS = Arrays.asList('a', 'd', 'w', 's');
+
+	public static final List<Character> TARGETS = Arrays.asList('a', 'd', 'w', 's');
 
 	public static char getUpPlayerSymbol() {
 		return playerSymbols[0];

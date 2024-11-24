@@ -2,6 +2,7 @@ package cs.vsu.ru.myshkevich_a_n.littletanks;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
@@ -37,10 +38,12 @@ public class Game {
 			p.move(d);
 			world.getCell(p.getRow(), p.getCol()).setTank(p);
 		}
-		/*for (Tank e : enemies) {
+		Random rnd = new Random();
+		for (Tank e : enemies) {
 			world.getCell(e.getRow(), e.getCol()).setTank(null);
-			e.move('a');
+			char c = Global.TARGETS.get(rnd.nextInt(Global.TARGETS.size()));
+			e.move(c);
 			world.getCell(e.getRow(), e.getCol()).setTank(e);
-		}*/
+		}
 	}
 }

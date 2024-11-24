@@ -10,6 +10,7 @@ public abstract class Tank {
 	private char symbolDown;
 
 	private int row, col;
+	private int lifes;
 
 	protected Target target;
 
@@ -78,11 +79,25 @@ public abstract class Tank {
 	}
 
 	public void setCol(int col) {
+		if (col > 12 || col < 0) {
+			return;
+		}
 		this.col = col;
 	}
 
 	public void setRow(int row) {
+		if (row > 12 || row < 0) {
+			return;
+		}
 		this.row = row;
+	}
+
+	public int getLifes() {
+		return lifes;
+	}
+
+	public void setLifes(int lifes) {
+		this.lifes = lifes;
 	}
 
 	public abstract void move(char c);

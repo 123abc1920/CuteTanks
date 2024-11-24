@@ -13,6 +13,7 @@ public class Player extends Tank {
 		this.setSymbolRight(Global.getRightPlayerSymbol());
 	}
 
+	@Override
 	public void move(char c) {
 		this.setTarget(Target.values()[Global.TARGETS.indexOf(c)]);
 		this.setRow(this.getRow() + this.getTarget().changeRowsCols()[0]);
