@@ -40,7 +40,7 @@ public class Game {
 	public String getLifes() {
 		int[] lifes = new int[players.size()];
 		for (Tank p : players) {
-			lifes[players.indexOf(p)] = p.getLifes();
+			lifes[players.indexOf(p)] = p.getLife();
 		}
 		return Arrays.toString(lifes).replace("[", "").replace("]", "");
 	}
@@ -69,6 +69,7 @@ public class Game {
 	private void move(char c, Tank tank) {
 		world.getCell(tank.getRow(), tank.getCol()).setTank(null);
 		tank.setTarget(Target.values()[Global.TARGETS.indexOf(c)]);
+
 		int newRow = Math.max(0, Math.min(tank.getRow() + tank.getTarget().changeRowsCols()[0], 12));
 		int newCol = Math.max(0, Math.min(tank.getCol() + tank.getTarget().changeRowsCols()[1], 12));
 		if (world.getCell(newRow, newCol).getAvailable()) {
@@ -76,5 +77,40 @@ public class Game {
 			tank.setCol(newCol);
 		}
 		world.getCell(tank.getRow(), tank.getCol()).setTank(tank);
+
+		shot(tank.getRow(), tank.getCol(), tank.getTarget());
 	};
+
+	private void shot(int row, int col, Target target) {
+		row += target.changeRowsCols()[0];
+		col += row + target.changeRowsCols()[1];
+		while (row >= 0 && row <= 12 && col >= 0 && col <= 12) {
+			if (!world.getCell(row, col).getAvailable()) {
+				if (world.getCell(row, col).setDestroy()) {
+					Cell c = world.getCell(row, col);
+					c.setCol(col);
+					c.setRow(row);
+					if (c.getTank() != null) {
+						if (c.getTank().isEnemy()) {
+							enemies.remove(c.getTank());
+						} else {
+							players.remove(c.getTank());
+						}
+					}
+					world.setCell(row, col, c);
+				}
+				if (players.size() == 0) {
+					System.out.println("You lose");
+					System.exit(0);
+				}
+				if (enemies.size() == 0) {
+					System.out.println("You win");
+					System.exit(0);
+				}
+				return;
+			}
+			row += target.changeRowsCols()[0];
+			col += target.changeRowsCols()[1];
+		}
+	}
 }

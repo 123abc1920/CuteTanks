@@ -4,4 +4,5 @@ public class Tree extends Cell {
 	public Tree() {
 		this.setSymbol(Global.treeSymbol);
 	}
+
 }

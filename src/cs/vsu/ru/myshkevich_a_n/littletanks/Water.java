@@ -5,4 +5,5 @@ public class Water extends Cell {
 		this.setSymbol(Global.waterSymbol);
 		this.setAvailable(false);
 	}
+	
 }
