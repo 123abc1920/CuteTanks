@@ -1,7 +1,7 @@
 package cs.vsu.ru.myshkevich_a_n.littletanks;
 
 public class Wall extends Cell {
-	private int lifes;
+	private int lifes = 3;
 
 	public Wall() {
 		this.setSymbol(Global.wallSymbol);
@@ -11,7 +11,11 @@ public class Wall extends Cell {
 		return lifes;
 	}
 
-	public void setLifes(int lifes) {
+	public boolean setLifes(int lifes) {
 		this.lifes = lifes;
+		if (this.lifes == 0) {
+			return false;
+		}
+		return true;
 	}
 }

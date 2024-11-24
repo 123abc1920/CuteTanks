@@ -30,7 +30,10 @@ public class Game {
 
 	public void move() {
 		for (Tank p : players) {
-			char d = s.nextLine().charAt(0);
+			char d = '0';
+			while (!Global.TARGETS.contains(d)) {
+				d = s.nextLine().charAt(0);
+			}
 			if (d == 'q') {
 				System.exit(0);
 			}

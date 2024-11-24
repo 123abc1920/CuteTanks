@@ -1,8 +1,5 @@
 package cs.vsu.ru.myshkevich_a_n.littletanks;
 
-import java.util.Arrays;
-import java.util.List;
-
 public abstract class Tank {
 	private char symbolUp;
 	private char symbolLeft;
@@ -96,8 +93,12 @@ public abstract class Tank {
 		return lifes;
 	}
 
-	public void setLifes(int lifes) {
+	public boolean setLifes(int lifes) {
 		this.lifes = lifes;
+		if (this.lifes == 0) {
+			return false;
+		}
+		return true;
 	}
 
 	public abstract void move(char c);
