@@ -1,6 +1,7 @@
 package cs.vsu.ru.myshkevich_a_n.littletanks;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -8,7 +9,7 @@ import java.util.Scanner;
 public class Game {
 	private World world;
 	private Level lvl;
-	// private int score = 0;
+	private int score = 0;
 	private List<Tank> players = new ArrayList<>();
 	private List<Tank> enemies = new ArrayList<>();
 	private Scanner s = new Scanner(System.in);
@@ -26,6 +27,22 @@ public class Game {
 
 	public void setWorld(World world) {
 		this.world = world;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+	public String getLifes() {
+		int[] lifes = new int[players.size()];
+		for (Tank p : players) {
+			lifes[players.indexOf(p)] = p.getLifes();
+		}
+		return Arrays.toString(lifes).replace("[", "").replace("]", "");
 	}
 
 	public void gameStep() {
