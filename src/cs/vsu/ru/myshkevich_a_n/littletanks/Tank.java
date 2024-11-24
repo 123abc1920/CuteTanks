@@ -101,5 +101,11 @@ public abstract class Tank {
 		return true;
 	}
 
-	public abstract void move(char c);
+	protected int[] move(char c) {
+		this.setTarget(Target.values()[Global.TARGETS.indexOf(c)]);
+		int newRow = this.getRow() + this.getTarget().changeRowsCols()[0];
+		int newCol = this.getCol() + this.getTarget().changeRowsCols()[1];
+
+		return new int[] { newRow, newCol };
+	};
 }

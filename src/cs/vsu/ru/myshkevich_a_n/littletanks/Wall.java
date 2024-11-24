@@ -5,6 +5,7 @@ public class Wall extends Cell {
 
 	public Wall() {
 		this.setSymbol(Global.wallSymbol);
+		this.setAvailable(false);
 	}
 
 	public int getLifes() {

@@ -4,6 +4,7 @@ public abstract class Cell {
 	private int row, col;
 	private char symbol;
 	private Tank tank = null;
+	private boolean isAvailable = true;
 
 	public int getRow() {
 		return row;
@@ -43,5 +44,13 @@ public abstract class Cell {
 
 	public Tank getTank() {
 		return tank;
+	}
+
+	public void setAvailable(boolean a) {
+		this.isAvailable = a;
+	}
+
+	public boolean getAvailable() {
+		return isAvailable;
 	}
 }
