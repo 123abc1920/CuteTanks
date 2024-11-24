@@ -28,33 +28,36 @@ public class Game {
 		this.world = world;
 	}
 
-	public void move() {
+	public void gameStep() {
+		char d = '0';
 		for (Tank p : players) {
-			char d = '0';
 			while (!Global.TARGETS.contains(d) && d != 'q') {
-				d = s.nextLine().charAt(0);
+				String string = s.nextLine();
+				if (!string.isEmpty()) {
+					d = string.charAt(0);
+				}
 			}
 			if (d == 'q') {
 				System.exit(0);
 			}
-			world.getCell(p.getRow(), p.getCol()).setTank(null);
-			int[] newCoords = p.move(d);
-			if (world.getCell(newCoords[0], newCoords[1]).getAvailable()) {
-				p.setRow(newCoords[0]);
-				p.setCol(newCoords[1]);
-			}
-			world.getCell(p.getRow(), p.getCol()).setTank(p);
+			move(d, p);
 		}
 		Random rnd = new Random();
 		for (Tank e : enemies) {
-			world.getCell(e.getRow(), e.getCol()).setTank(null);
-			char c = Global.TARGETS.get(rnd.nextInt(Global.TARGETS.size()));
-			int[] newCoords = e.move(c);
-			if (world.getCell(newCoords[0], newCoords[1]).getAvailable()) {
-				e.setRow(newCoords[0]);
-				e.setCol(newCoords[1]);
-			}
-			world.getCell(e.getRow(), e.getCol()).setTank(e);
+			d = Global.TARGETS.get(rnd.nextInt(Global.TARGETS.size()));
+			move(d, e);
 		}
 	}
+
+	private void move(char c, Tank tank) {
+		world.getCell(tank.getRow(), tank.getCol()).setTank(null);
+		tank.setTarget(Target.values()[Global.TARGETS.indexOf(c)]);
+		int newRow = Math.max(0, Math.min(tank.getRow() + tank.getTarget().changeRowsCols()[0], 12));
+		int newCol = Math.max(0, Math.min(tank.getCol() + tank.getTarget().changeRowsCols()[1], 12));
+		if (world.getCell(newRow, newCol).getAvailable()) {
+			tank.setRow(newRow);
+			tank.setCol(newCol);
+		}
+		world.getCell(tank.getRow(), tank.getCol()).setTank(tank);
+	};
 }

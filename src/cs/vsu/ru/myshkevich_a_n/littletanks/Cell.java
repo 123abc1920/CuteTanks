@@ -51,6 +51,9 @@ public abstract class Cell {
 	}
 
 	public boolean getAvailable() {
+		if (this.tank != null) {
+			return false;
+		}
 		return isAvailable;
 	}
 }

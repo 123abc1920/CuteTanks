@@ -9,7 +9,7 @@ public class Drawing {
 			System.out.println();
 		}
 
-		game.move();
+		game.gameStep();
 		draw(game);
 	}
 }
