@@ -126,11 +126,13 @@ public class Game {
 		}
 		world.getCell(tank.getRow(), tank.getCol()).setTank(tank);
 
-		int row = Math.max(0, Math.min(tank.getRow() + tank.getTarget().changeRowsCols()[0], 12));
-		int col = Math.max(0, Math.min(tank.getCol() + tank.getTarget().changeRowsCols()[1], 12));
+		int row = tank.getRow() + tank.getTarget().changeRowsCols()[0];
+		int col = tank.getCol() + tank.getTarget().changeRowsCols()[1];
 		Core core = new Core(row, col, tank.target);
-		cores.add(core);
-		this.world.getCell(row, col).setCore(core);
+		if (core.getRow() >= 0 && core.getRow() <= 12 && core.getCol() >= 0 && core.getCol() <= 12) {
+			cores.add(core);
+			this.world.getCell(row, col).setCore(core);
+		}
 	};
 
 	private void shot(Core core) {

@@ -79,7 +79,6 @@ public abstract class Cell {
 		this.setCore(null);
 		if (this.tank != null) {
 			this.tank = this.tank.setDestroy();
-			System.out.println(core.getRow() + " " + core.getCol());
 			return this;
 		}
 		return this;
