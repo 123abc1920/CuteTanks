@@ -14,13 +14,28 @@ public class Game {
 	private List<Tank> players = new ArrayList<>();
 	private List<Tank> enemies = new ArrayList<>();
 	private List<Core> cores = new ArrayList<>();
+	private Spawner spawner;
+	private Flag flag;
 	private Scanner s = new Scanner(System.in);
 
 	public Game() {
-		lvl = new Level(s.nextLine());
-		world = new World(lvl);
-		enemies.add(world.spawnEnemy(true));
-		players.add(world.spawnEnemy(false));
+		createNewGame(0);
+	}
+
+	private void createNewGame(int score) {
+		String str = s.nextLine();
+		while (!"12345".contains(str)) {
+			str = s.nextLine();
+		}
+		this.lvl = new Level(str);
+		this.world = new World(lvl);
+		this.enemies.clear();
+		this.players.clear();
+		this.enemies.add(world.spawnEnemy(true));
+		this.players.add(world.spawnEnemy(false));
+		this.score = score;
+		this.flag = (Flag) world.getCell(12, 6);
+		this.spawner = (Spawner) world.getCell(0, 6);
 	}
 
 	public World getWorld() {
@@ -48,6 +63,7 @@ public class Game {
 	}
 
 	public void gameStep() {
+		Drawing.printInfo(this);
 		Drawing.draw(this);
 		char d = '0';
 		for (Tank p : players) {
@@ -104,23 +120,19 @@ public class Game {
 			Enemy p = (Enemy) iteratorE.next();
 			if (p.getKilled()) {
 				iteratorE.remove();
+				this.score += 10;
 			}
 		}
 
-		if (enemies.size() == 0) {
-			System.out.println("You win");
+		if (players.size() == 0 || flag.getLifes() == 0) {
+			Drawing.printWin(false);
+			this.createNewGame(0);
 		}
 
-		if (players.size() == 0) {
-			System.out.println("You lose");
-		}
-
-		for (int i = 0; i < 13; i++) {
-			for (int j = 0; j < 13; j++) {
-				if (this.world.getCell(i, j).getCore() != null) {
-					System.out.println(i + " " + j);
-				}
-			}
+		if (spawner.getLifes() == 0) {
+			this.score += 50;
+			Drawing.printWin(true);
+			this.createNewGame(this.score);
 		}
 
 		this.gameStep();

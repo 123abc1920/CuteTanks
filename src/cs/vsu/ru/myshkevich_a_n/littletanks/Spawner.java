@@ -1,10 +1,18 @@
 package cs.vsu.ru.myshkevich_a_n.littletanks;
 
 public class Spawner extends Cell {
-	private int lifes = 1;
 
 	public Spawner() {
 		this.setSymbol(Global.spawnerSymbol);
+		this.setLifes(1);
+	}
+
+	@Override
+	public Cell setDestroy(Core core) {
+		this.setCore(null);
+		this.setLifes(this.getLifes() - 1);
+		core.setNotAvailable();
+		return this;
 	}
 
 }
