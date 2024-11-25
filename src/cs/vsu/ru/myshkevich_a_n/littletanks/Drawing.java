@@ -9,8 +9,5 @@ public class Drawing {
 			}
 			System.out.println();
 		}
-
-		game.gameStep();
-		draw(game);
 	}
 }

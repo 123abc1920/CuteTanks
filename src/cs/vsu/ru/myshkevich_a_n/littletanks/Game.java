@@ -48,6 +48,7 @@ public class Game {
 	}
 
 	public void gameStep() {
+		Drawing.draw(this);
 		char d = '0';
 		for (Tank p : players) {
 			while (!Global.TARGETS.contains(d) && d != 'q') {
@@ -109,6 +110,8 @@ public class Game {
 		if (players.size() == 0) {
 			System.out.println("You lose");
 		}
+
+		this.gameStep();
 	}
 
 	private void move(char c, Tank tank) {
