@@ -10,6 +10,7 @@ public class Core {
 		this.target = target;
 		this.row = row;
 		this.col = col;
+		this.isAvailable = true;
 	}
 
 	public int getCol() {
@@ -25,11 +26,15 @@ public class Core {
 	}
 
 	public void setCol(int col) {
-		this.col = col;
+		if (this.isAvailable) {
+			this.col = col;
+		}
 	}
 
 	public void setRow(int row) {
-		this.row = row;
+		if (this.isAvailable) {
+			this.row = row;
+		}
 	}
 
 	public Target getTarget() {

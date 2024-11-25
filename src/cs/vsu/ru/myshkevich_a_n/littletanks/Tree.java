@@ -7,8 +7,8 @@ public class Tree extends Cell {
 
 	@Override
 	public Cell setDestroy(Core core) {
-		core.setNotAvailable();
 		this.setCore(null);
+		core.setNotAvailable();
 		return this;
 	}
 

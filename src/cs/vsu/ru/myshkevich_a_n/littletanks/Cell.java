@@ -28,7 +28,10 @@ public abstract class Cell {
 		if (this.tank != null) {
 			return this.tank.getSymbol();
 		}
-		return symbol;
+		if (this.core != null) {
+			return Global.coreSymbol;
+		}
+		return this.symbol;
 	}
 
 	public void setSymbol(char symbol) {

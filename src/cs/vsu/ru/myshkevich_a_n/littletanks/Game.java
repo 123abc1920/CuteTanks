@@ -69,6 +69,7 @@ public class Game {
 		}
 
 		while (cores.size() > 0) {
+			Drawing.draw(this);
 			Iterator<Core> iterator = cores.iterator();
 			while (iterator.hasNext()) {
 				Core core = iterator.next();
@@ -80,6 +81,9 @@ public class Game {
 					}
 				}
 				if (!core.getAvailable()) {
+					if (core.getRow() >= 0 && core.getRow() <= 12 && core.getCol() >= 0 && core.getCol() <= 12) {
+						this.world.getCell(core.getRow(), core.getCol()).setCore(null);
+					}
 					iterator.remove();
 				}
 			}
@@ -109,6 +113,14 @@ public class Game {
 
 		if (players.size() == 0) {
 			System.out.println("You lose");
+		}
+
+		for (int i = 0; i < 13; i++) {
+			for (int j = 0; j < 13; j++) {
+				if (this.world.getCell(i, j).getCore() != null) {
+					System.out.println(i + " " + j);
+				}
+			}
 		}
 
 		this.gameStep();
