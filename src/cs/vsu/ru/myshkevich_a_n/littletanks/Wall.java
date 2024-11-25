@@ -14,11 +14,17 @@ public class Wall extends Cell {
 	}
 
 	@Override
-	public boolean setDestroy(Core core) {
+	public Cell setDestroy(Core core) {
 		this.setLifes(this.getLifes() - 1);
 		core.setNotAvailable();
 		this.setCore(null);
-		return false;
+		if (this.getLifes() == 0) {
+			Empty e = new Empty();
+			e.setCol(this.getCol());
+			e.setRow(this.getRow());
+			return e;
+		}
+		return this;
 	}
 
 }

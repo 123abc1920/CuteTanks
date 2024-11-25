@@ -72,7 +72,11 @@ public class Game {
 			while (iterator.hasNext()) {
 				Core core = iterator.next();
 				if (core.getAvailable()) {
-					shot(core);
+					if (core.getRow() >= 0 && core.getRow() <= 12 && core.getCol() >= 0 && core.getCol() <= 12) {
+						shot(core);
+					} else {
+						core.setNotAvailable();
+					}
 				}
 				if (!core.getAvailable()) {
 					iterator.remove();
@@ -81,6 +85,30 @@ public class Game {
 		}
 
 		cores.clear();
+
+		Iterator<Tank> iteratorP = players.iterator();
+		while (iteratorP.hasNext()) {
+			Player p = (Player) iteratorP.next();
+			if (p.getKilled()) {
+				iteratorP.remove();
+			}
+		}
+
+		Iterator<Tank> iteratorE = enemies.iterator();
+		while (iteratorE.hasNext()) {
+			Enemy p = (Enemy) iteratorE.next();
+			if (p.getKilled()) {
+				iteratorE.remove();
+			}
+		}
+
+		if (enemies.size() == 0) {
+			System.out.println("You win");
+		}
+
+		if (players.size() == 0) {
+			System.out.println("You lose");
+		}
 	}
 
 	private void move(char c, Tank tank) {
@@ -95,44 +123,23 @@ public class Game {
 		}
 		world.getCell(tank.getRow(), tank.getCol()).setTank(tank);
 
-		int col = Math.max(0, Math.min(tank.getCol() + tank.getTarget().changeRowsCols()[1], 12));
 		int row = Math.max(0, Math.min(tank.getRow() + tank.getTarget().changeRowsCols()[0], 12));
+		int col = Math.max(0, Math.min(tank.getCol() + tank.getTarget().changeRowsCols()[1], 12));
 		Core core = new Core(row, col, tank.target);
 		cores.add(core);
 		this.world.getCell(row, col).setCore(core);
 	};
 
 	private void shot(Core core) {
+		this.world.getCell(core.getRow(), core.getCol()).setCore(null);
+		this.world.setCell(core.getRow(), core.getCol(),
+				this.world.getCell(core.getRow(), core.getCol()).setDestroy(core));
+		core.setRow(core.getRow() + core.getTarget().changeRowsCols()[0]);
+		core.setCol(core.getCol() + core.getTarget().changeRowsCols()[1]);
 		if (core.getRow() >= 0 && core.getRow() <= 12 && core.getCol() >= 0 && core.getCol() <= 12) {
-			if (this.world.getCell(core.getRow(), core.getCol()).setDestroy(core)) {
-				core.setCol(core.getCol() + core.getTarget().changeRowsCols()[1]);
-				core.setRow(core.getRow() + core.getTarget().changeRowsCols()[0]);
-				if (core.getRow() >= 0 && core.getRow() <= 12 && core.getCol() >= 0 && core.getCol() <= 12) {
-					this.world.getCell(core.getRow(), core.getCol()).setCore(core);
-				} else {
-					core.setNotAvailable();
-					return;
-				}
-			} else {
-				if (this.world.getCell(core.getRow(), core.getCol()).getTank() != null) {
-					if (this.world.getCell(core.getRow(), core.getCol()).getTank().getLife() == 0) {
-						if (this.world.getCell(core.getRow(), core.getCol()).getTank().isEnemy()) {
-							enemies.remove(this.world.getCell(core.getRow(), core.getCol()).getTank());
-						} else {
-							players.remove(this.world.getCell(core.getRow(), core.getCol()).getTank());
-						}
-					}
-				}
-				if (this.world.getCell(core.getRow(), core.getCol()).getLifes() == 0) {
-					Empty e = new Empty();
-					e.setCol(core.getCol());
-					e.setRow(core.getRow());
-					this.world.setCell(core.getRow(), core.getCol(), e);
-				}
-			}
+			this.world.getCell(core.getRow(), core.getCol()).setCore(core);
 		} else {
 			core.setNotAvailable();
-			this.world.getCell(core.getRow(), core.getCol()).setCore(null);
 			return;
 		}
 	}

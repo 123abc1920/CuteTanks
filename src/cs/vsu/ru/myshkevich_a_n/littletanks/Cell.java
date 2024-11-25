@@ -75,11 +75,13 @@ public abstract class Cell {
 		this.lifes = lifes;
 	}
 
-	public boolean setDestroy(Core core) {
+	public Cell setDestroy(Core core) {
+		this.setCore(null);
 		if (this.tank != null) {
-			this.tank.setDestroy();
-			return false;
+			this.tank = this.tank.setDestroy();
+			System.out.println(core.getRow() + " " + core.getCol());
+			return this;
 		}
-		return true;
+		return this;
 	}
 }

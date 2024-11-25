@@ -6,10 +6,10 @@ public class Tree extends Cell {
 	}
 
 	@Override
-	public boolean setDestroy(Core core) {
+	public Cell setDestroy(Core core) {
 		core.setNotAvailable();
 		this.setCore(null);
-		return false;
+		return this;
 	}
 
 }

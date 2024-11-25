@@ -11,7 +11,7 @@ public abstract class Tank {
 
 	protected Target target;
 
-	private boolean isKilled = false;
+	public boolean isKilled = false;
 
 	public Target getTarget() {
 		return target;
@@ -99,11 +99,17 @@ public abstract class Tank {
 		this.lifes = life;
 	}
 
-	public void setDestroy() {
+	public boolean getKilled() {
+		return isKilled;
+	}
+
+	public Tank setDestroy() {
 		this.setLife(this.getLife() - 1);
 		if (this.getLife() == 0) {
 			this.isKilled = true;
+			return null;
 		}
+		return this;
 	}
 
 	public abstract boolean isEnemy();
