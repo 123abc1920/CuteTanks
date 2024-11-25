@@ -81,7 +81,9 @@ public abstract class Cell {
 	public Cell setDestroy(Core core) {
 		this.setCore(null);
 		if (this.tank != null) {
-			this.tank = this.tank.setDestroy();
+			if (this.tank.isEnemy() != core.getFromEnemy()) {
+				this.tank = this.tank.setDestroy();
+			}
 			return this;
 		}
 		return this;

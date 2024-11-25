@@ -16,6 +16,7 @@ public class Game {
 	private List<Core> cores = new ArrayList<>();
 	private Spawner spawner;
 	private Flag flag;
+	private int steps = 0;
 	private Scanner s = new Scanner(System.in);
 
 	public Game() {
@@ -36,6 +37,7 @@ public class Game {
 		this.score = score;
 		this.flag = (Flag) world.getCell(12, 6);
 		this.spawner = (Spawner) world.getCell(0, 6);
+		this.steps = 0;
 	}
 
 	public World getWorld() {
@@ -139,6 +141,12 @@ public class Game {
 			this.createNewGame(this.score);
 		}
 
+		if (this.steps % 5 == 0) {
+			this.enemies.add(world.spawnEnemy(true));
+			this.steps = 0;
+		}
+
+		this.steps++;
 		this.gameStep();
 	}
 
@@ -156,7 +164,7 @@ public class Game {
 
 		int row = tank.getRow() + tank.getTarget().changeRowsCols()[0];
 		int col = tank.getCol() + tank.getTarget().changeRowsCols()[1];
-		Core core = new Core(row, col, tank.target);
+		Core core = new Core(row, col, tank.target, tank.isEnemy());
 		if (core.getRow() >= 0 && core.getRow() <= 12 && core.getCol() >= 0 && core.getCol() <= 12) {
 			cores.add(core);
 			this.world.getCell(row, col).setCore(core);

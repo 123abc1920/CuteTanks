@@ -5,12 +5,14 @@ public class Core {
 	private static final char symbol = Global.coreSymbol;
 	private Target target;
 	private boolean isAvailable = true;
+	private boolean fromEnemy = false;
 
-	public Core(int row, int col, Target target) {
+	public Core(int row, int col, Target target, boolean fromEnemy) {
 		this.target = target;
 		this.row = row;
 		this.col = col;
 		this.isAvailable = true;
+		this.fromEnemy = fromEnemy;
 	}
 
 	public int getCol() {
@@ -51,5 +53,13 @@ public class Core {
 
 	public void setNotAvailable() {
 		this.isAvailable = false;
+	}
+
+	public void setFromEnemy(boolean fromEnemy) {
+		this.fromEnemy = fromEnemy;
+	}
+
+	public boolean getFromEnemy() {
+		return this.fromEnemy;
 	}
 }

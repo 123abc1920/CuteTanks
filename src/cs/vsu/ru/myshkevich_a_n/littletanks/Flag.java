@@ -9,9 +9,11 @@ public class Flag extends Cell {
 
 	@Override
 	public Cell setDestroy(Core core) {
-		this.setCore(null);
-		this.setLifes(this.getLifes() - 1);
-		core.setNotAvailable();
+		if (core.getFromEnemy()) {
+			this.setCore(null);
+			this.setLifes(this.getLifes() - 1);
+			core.setNotAvailable();
+		}
 		return this;
 	}
 
