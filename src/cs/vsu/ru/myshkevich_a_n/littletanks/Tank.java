@@ -1,6 +1,6 @@
 package cs.vsu.ru.myshkevich_a_n.littletanks;
 
-public abstract class Tank implements Destroyable {
+public abstract class Tank {
 	private char symbolUp;
 	private char symbolLeft;
 	private char symbolRight;
@@ -89,23 +89,12 @@ public abstract class Tank implements Destroyable {
 		this.row = row;
 	}
 
-	@Override
 	public int getLife() {
 		return this.lifes;
 	}
 
-	@Override
 	public void setLife(int life) {
 		this.lifes = life;
-	}
-
-	@Override
-	public boolean setDestroy() {
-		this.setLife(this.getLife() - 1);
-		if (this.getLife() <= 0) {
-			return true;
-		}
-		return false;
 	}
 	
 	public abstract boolean isEnemy();

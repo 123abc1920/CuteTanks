@@ -5,4 +5,11 @@ public class Tree extends Cell {
 		this.setSymbol(Global.treeSymbol);
 	}
 
+	@Override
+	public boolean setDestroy(Core core) {
+		core.setNotAvailable();
+		this.setCore(null);
+		return false;
+	}
+
 }

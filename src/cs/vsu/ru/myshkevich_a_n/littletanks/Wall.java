@@ -1,6 +1,6 @@
 package cs.vsu.ru.myshkevich_a_n.littletanks;
 
-public class Wall extends Cell implements Destroyable {
+public class Wall extends Cell {
 	private int lifes = 3;
 
 	public Wall() {
@@ -8,30 +8,17 @@ public class Wall extends Cell implements Destroyable {
 		this.setAvailable(false);
 	}
 
-	public int getLifes() {
-		return lifes;
-	}
-
-	public void setLifes(int lifes) {
-		this.lifes = lifes;
+	@Override
+	public char getSymbol() {
+		String s = Integer.toString(this.lifes);
+		return s.charAt(0);
 	}
 
 	@Override
-	public int getLife() {
-		return this.lifes;
-	}
-
-	@Override
-	public void setLife(int life) {
-		this.lifes = life;
-	}
-
-	@Override
-	public boolean setDestroy() {
-		this.setLife(this.getLife() - 1);
-		if (this.getLife() <= 0) {
-			return true;
-		}
+	public boolean setDestroy(Core core) {
+		this.setLifes(this.getLifes() - 1);
+		core.setNotAvailable();
+		this.setCore(null);
 		return false;
 	}
 

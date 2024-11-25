@@ -5,6 +5,8 @@ public abstract class Cell {
 	private char symbol;
 	private Tank tank = null;
 	private boolean isAvailable = true;
+	private Core core = null;
+	private int lifes = 1;
 
 	public int getRow() {
 		return row;
@@ -57,17 +59,23 @@ public abstract class Cell {
 		return isAvailable;
 	}
 
-	public Cell renewCell() {
-		if (this.tank == null) {
-			return new Empty();
-		}
-		return this;
+	public void setCore(Core core) {
+		this.core = core;
 	}
 
-	public boolean setDestroy() {
-		if (this.tank != null) {
-			return this.tank.setDestroy();
-		}
-		return false;
+	public Core getCore() {
+		return core;
+	}
+
+	public int getLifes() {
+		return lifes;
+	}
+
+	public void setLifes(int lifes) {
+		this.lifes = lifes;
+	}
+
+	public boolean setDestroy(Core core) {
+		return true;
 	}
 }

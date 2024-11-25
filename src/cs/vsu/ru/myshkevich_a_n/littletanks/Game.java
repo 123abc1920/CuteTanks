@@ -2,6 +2,7 @@ package cs.vsu.ru.myshkevich_a_n.littletanks;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -12,6 +13,7 @@ public class Game {
 	private int score = 0;
 	private List<Tank> players = new ArrayList<>();
 	private List<Tank> enemies = new ArrayList<>();
+	private List<Core> cores = new ArrayList<>();
 	private Scanner s = new Scanner(System.in);
 
 	public Game() {
@@ -64,6 +66,21 @@ public class Game {
 			d = Global.TARGETS.get(rnd.nextInt(Global.TARGETS.size()));
 			move(d, e);
 		}
+
+		while (cores.size() > 0) {
+			Iterator<Core> iterator = cores.iterator();
+			while (iterator.hasNext()) {
+				Core core = iterator.next();
+				if (core.getAvailable()) {
+					shot(core);
+				}
+				if (!core.getAvailable()) {
+					iterator.remove();
+				}
+			}
+		}
+
+		cores.clear();
 	}
 
 	private void move(char c, Tank tank) {
@@ -78,39 +95,36 @@ public class Game {
 		}
 		world.getCell(tank.getRow(), tank.getCol()).setTank(tank);
 
-		shot(tank.getRow(), tank.getCol(), tank.getTarget());
+		int col = Math.max(0, Math.min(tank.getCol() + tank.getTarget().changeRowsCols()[1], 12));
+		int row = Math.max(0, Math.min(tank.getRow() + tank.getTarget().changeRowsCols()[0], 12));
+		Core core = new Core(row, col, tank.target);
+		cores.add(core);
+		this.world.getCell(row, col).setCore(core);
 	};
 
-	private void shot(int row, int col, Target target) {
-		row += target.changeRowsCols()[0];
-		col += row + target.changeRowsCols()[1];
-		while (row >= 0 && row <= 12 && col >= 0 && col <= 12) {
-			if (!world.getCell(row, col).getAvailable()) {
-				if (world.getCell(row, col).setDestroy()) {
-					Cell c = world.getCell(row, col);
-					c.setCol(col);
-					c.setRow(row);
-					if (c.getTank() != null) {
-						if (c.getTank().isEnemy()) {
-							enemies.remove(c.getTank());
-						} else {
-							players.remove(c.getTank());
-						}
-					}
-					world.setCell(row, col, c);
+	private void shot(Core core) {
+		if (core.getRow() >= 0 && core.getRow() <= 12 && core.getCol() >= 0 && core.getCol() <= 12) {
+			if (this.world.getCell(core.getRow(), core.getCol()).setDestroy(core)) {
+				core.setCol(core.getCol() + core.getTarget().changeRowsCols()[1]);
+				core.setRow(core.getRow() + core.getTarget().changeRowsCols()[0]);
+				if (core.getRow() >= 0 && core.getRow() <= 12 && core.getCol() >= 0 && core.getCol() <= 12) {
+					this.world.getCell(core.getRow(), core.getCol()).setCore(core);
+				} else {
+					core.setNotAvailable();
+					return;
 				}
-				if (players.size() == 0) {
-					System.out.println("You lose");
-					System.exit(0);
+			} else {
+				if (this.world.getCell(core.getRow(), core.getCol()).getLifes() == 0) {
+					Empty e = new Empty();
+					e.setCol(core.getCol());
+					e.setRow(core.getRow());
+					this.world.setCell(core.getRow(), core.getCol(), e);
 				}
-				if (enemies.size() == 0) {
-					System.out.println("You win");
-					System.exit(0);
-				}
-				return;
 			}
-			row += target.changeRowsCols()[0];
-			col += target.changeRowsCols()[1];
+		} else {
+			core.setNotAvailable();
+			this.world.getCell(core.getRow(), core.getCol()).setCore(null);
+			return;
 		}
 	}
 }
