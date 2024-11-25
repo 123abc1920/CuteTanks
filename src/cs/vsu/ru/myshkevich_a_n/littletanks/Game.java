@@ -86,6 +86,10 @@ public class Game {
 
 		while (cores.size() > 0) {
 			Drawing.draw(this);
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+			}
 			Iterator<Core> iterator = cores.iterator();
 			while (iterator.hasNext()) {
 				Core core = iterator.next();
