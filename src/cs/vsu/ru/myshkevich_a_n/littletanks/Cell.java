@@ -76,6 +76,10 @@ public abstract class Cell {
 	}
 
 	public boolean setDestroy(Core core) {
+		if (this.tank != null) {
+			this.tank.setDestroy();
+			return false;
+		}
 		return true;
 	}
 }

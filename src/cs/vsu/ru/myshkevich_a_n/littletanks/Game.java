@@ -114,6 +114,15 @@ public class Game {
 					return;
 				}
 			} else {
+				if (this.world.getCell(core.getRow(), core.getCol()).getTank() != null) {
+					if (this.world.getCell(core.getRow(), core.getCol()).getTank().getLife() == 0) {
+						if (this.world.getCell(core.getRow(), core.getCol()).getTank().isEnemy()) {
+							enemies.remove(this.world.getCell(core.getRow(), core.getCol()).getTank());
+						} else {
+							players.remove(this.world.getCell(core.getRow(), core.getCol()).getTank());
+						}
+					}
+				}
 				if (this.world.getCell(core.getRow(), core.getCol()).getLifes() == 0) {
 					Empty e = new Empty();
 					e.setCol(core.getCol());

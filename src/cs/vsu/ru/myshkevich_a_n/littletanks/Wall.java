@@ -15,9 +15,7 @@ public class Wall extends Cell {
 
 	@Override
 	public boolean setDestroy(Core core) {
-		System.out.println(this.getCol() + " " + this.getRow() + " " + this.getLifes());
 		this.setLifes(this.getLifes() - 1);
-		System.out.println(this.getCol() + " " + this.getRow() + " " + this.getLifes());
 		core.setNotAvailable();
 		this.setCore(null);
 		return false;

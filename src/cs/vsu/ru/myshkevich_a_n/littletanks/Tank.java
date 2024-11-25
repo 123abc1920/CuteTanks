@@ -7,9 +7,11 @@ public abstract class Tank {
 	private char symbolDown;
 
 	private int row, col;
-	private int lifes = 3;
+	private int lifes = 1;
 
 	protected Target target;
+
+	private boolean isKilled = false;
 
 	public Target getTarget() {
 		return target;
@@ -96,7 +98,14 @@ public abstract class Tank {
 	public void setLife(int life) {
 		this.lifes = life;
 	}
-	
+
+	public void setDestroy() {
+		this.setLife(this.getLife() - 1);
+		if (this.getLife() == 0) {
+			this.isKilled = true;
+		}
+	}
+
 	public abstract boolean isEnemy();
 
 }
