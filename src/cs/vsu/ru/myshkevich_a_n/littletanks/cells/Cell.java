@@ -1,4 +1,4 @@
-package cs.vsu.ru.myshkevich_a_n.littletanks;
+package cs.vsu.ru.myshkevich_a_n.littletanks.cells;
 
 public abstract class Cell {
 	private int row, col;

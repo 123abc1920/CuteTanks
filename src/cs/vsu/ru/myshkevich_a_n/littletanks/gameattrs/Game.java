@@ -1,6 +1,8 @@
-package cs.vsu.ru.myshkevich_a_n.littletanks;
+package cs.vsu.ru.myshkevich_a_n.littletanks.gameattrs;
 
 import java.util.Scanner;
+
+import cs.vsu.ru.myshkevich_a_n.littletanks.Drawing;
 
 public class Game {
 	private World world;

@@ -1,5 +1,8 @@
 package cs.vsu.ru.myshkevich_a_n.littletanks;
 
+import cs.vsu.ru.myshkevich_a_n.littletanks.gameattrs.Game;
+import cs.vsu.ru.myshkevich_a_n.littletanks.gameattrs.Global;
+
 public class Drawing {
 
     public static void draw(Game game) {

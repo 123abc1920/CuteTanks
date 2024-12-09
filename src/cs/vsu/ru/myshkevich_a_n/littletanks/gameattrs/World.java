@@ -1,4 +1,4 @@
-package cs.vsu.ru.myshkevich_a_n.littletanks;
+package cs.vsu.ru.myshkevich_a_n.littletanks.gameattrs;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -6,6 +6,19 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.stream.Stream;
+
+import cs.vsu.ru.myshkevich_a_n.littletanks.cells.Cell;
+import cs.vsu.ru.myshkevich_a_n.littletanks.cells.Empty;
+import cs.vsu.ru.myshkevich_a_n.littletanks.cells.Flag;
+import cs.vsu.ru.myshkevich_a_n.littletanks.cells.Spawner;
+import cs.vsu.ru.myshkevich_a_n.littletanks.cells.Tree;
+import cs.vsu.ru.myshkevich_a_n.littletanks.cells.Wall;
+import cs.vsu.ru.myshkevich_a_n.littletanks.cells.Water;
+import cs.vsu.ru.myshkevich_a_n.littletanks.tanks.Core;
+import cs.vsu.ru.myshkevich_a_n.littletanks.tanks.Enemy;
+import cs.vsu.ru.myshkevich_a_n.littletanks.tanks.Player;
+import cs.vsu.ru.myshkevich_a_n.littletanks.tanks.Tank;
+import cs.vsu.ru.myshkevich_a_n.littletanks.tanks.Target;
 
 public class World {
 	private List<Enemy> enemies = new ArrayList<>();
@@ -96,7 +109,7 @@ public class World {
 	}
 
 	public void addCore(Tank tank) {
-		Core core = new Core(tank.getRow(), tank.getCol(), tank.target, tank.isEnemy());
+		Core core = new Core(tank.getRow(), tank.getCol(), tank.getTarget(), tank.isEnemy());
 		if (core.getRow() >= 0 && core.getRow() <= Global.size - 1 && core.getCol() >= 0
 				&& core.getCol() <= Global.size - 1) {
 			cores.add(core);

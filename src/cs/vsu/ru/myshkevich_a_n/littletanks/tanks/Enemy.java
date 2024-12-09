@@ -1,4 +1,6 @@
-package cs.vsu.ru.myshkevich_a_n.littletanks;
+package cs.vsu.ru.myshkevich_a_n.littletanks.tanks;
+
+import cs.vsu.ru.myshkevich_a_n.littletanks.gameattrs.Global;
 
 public class Enemy extends Tank {
 	public Enemy(int row, int col, Target target) {

@@ -1,4 +1,6 @@
-package cs.vsu.ru.myshkevich_a_n.littletanks;
+package cs.vsu.ru.myshkevich_a_n.littletanks.cells;
+
+import cs.vsu.ru.myshkevich_a_n.littletanks.gameattrs.Global;
 
 public class Tree extends Cell {
 	public Tree() {

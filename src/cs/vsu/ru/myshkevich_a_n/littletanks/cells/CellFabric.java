@@ -1,7 +1,9 @@
-package cs.vsu.ru.myshkevich_a_n.littletanks;
+package cs.vsu.ru.myshkevich_a_n.littletanks.cells;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import cs.vsu.ru.myshkevich_a_n.littletanks.gameattrs.Global;
 
 public class CellFabric {
 	private class AbstractCellFactory {
