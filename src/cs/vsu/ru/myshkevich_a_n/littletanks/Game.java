@@ -53,11 +53,26 @@ public class Game {
 		Drawing.printInfo(this);
 		Drawing.draw(this);
 
-		world.gameStep();
-
-		if (this.steps % 5 == 0) {
+		if ((this.steps + 1) % 5 == 0) {
 			world.spawnEnemy(true);
 			this.steps = 0;
+		}
+
+		GameStatus status = world.gameStep();
+
+		if (status == GameStatus.LOSE) {
+			Drawing.printInfo(this);
+			Drawing.draw(this);
+			Drawing.printWin(false);
+			this.createNewGame(0);
+		}
+
+		if (status == GameStatus.WIN) {
+			this.score += 50;
+			Drawing.printInfo(this);
+			Drawing.draw(this);
+			Drawing.printWin(true);
+			this.createNewGame(this.score);
 		}
 
 		this.steps++;

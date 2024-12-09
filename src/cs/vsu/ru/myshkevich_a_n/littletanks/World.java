@@ -13,6 +13,9 @@ public class World {
 	private List<Cell> cells = new ArrayList<>();
 	private List<Player> players = new ArrayList<>();
 
+	private Flag flag;
+	private Spawner spawner;
+
 	private int[][] board = new int[Global.size][Global.size];
 
 	private Scanner s = new Scanner(System.in);
@@ -29,9 +32,11 @@ public class World {
 					if (c == '#') {
 						cells.add(new Wall(i, j));
 					} else if (c == '$') {
-						cells.add(new Flag(i, j));
+						flag = new Flag(i, j);
+						cells.add(flag);
 					} else if (c == 'X') {
-						cells.add(new Spawner(i, j));
+						spawner = new Spawner(i, j);
+						cells.add(spawner);
 					} else if (c == '@') {
 						cells.add(new Tree(i, j));
 					} else if (c == '~') {
@@ -98,7 +103,7 @@ public class World {
 		}
 	}
 
-	public void gameStep() {
+	public GameStatus gameStep() {
 		playersMove();
 		enemiesMove();
 		coresMove();
@@ -127,13 +132,15 @@ public class World {
 			}
 		}
 
-		/*
-		 * if (players.size() == 0 || flag.getLifes() == 0) { Drawing.printInfo(this);
-		 * Drawing.draw(this); Drawing.printWin(false); this.createNewGame(0); }
-		 * 
-		 * if (spawner.getLifes() == 0) { this.score += 50; Drawing.printInfo(this);
-		 * Drawing.draw(this); Drawing.printWin(true); this.createNewGame(this.score); }
-		 */
+		if (players.size() == 0 || flag.getLifes() == 0) {
+			return GameStatus.LOSE;
+		}
+
+		if (spawner.getLifes() == 0) {
+			return GameStatus.WIN;
+		}
+
+		return GameStatus.NOTHING;
 	}
 
 	private void playersMove() {
