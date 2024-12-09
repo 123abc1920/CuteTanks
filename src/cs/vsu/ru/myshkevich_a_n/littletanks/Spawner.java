@@ -7,10 +7,16 @@ public class Spawner extends Cell {
 		this.setLifes(1);
 	}
 
+	public Spawner(int row, int col) {
+		this.setSymbol(Global.spawnerSymbol);
+		this.setLifes(1);
+		this.setCol(col);
+		this.setRow(row);
+	}
+
 	@Override
 	public Cell setDestroy(Core core) {
 		if (!core.getFromEnemy()) {
-			this.setCore(null);
 			this.setLifes(this.getLifes() - 1);
 			core.setNotAvailable();
 		}

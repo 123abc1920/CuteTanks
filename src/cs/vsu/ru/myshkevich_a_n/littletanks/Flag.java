@@ -7,10 +7,16 @@ public class Flag extends Cell {
 		this.setLifes(1);
 	}
 
+	public Flag(int row, int col) {
+		this.setCol(col);
+		this.setRow(row);
+		this.setSymbol(Global.flagSymbol);
+		this.setLifes(1);
+	}
+
 	@Override
 	public Cell setDestroy(Core core) {
 		if (core.getFromEnemy()) {
-			this.setCore(null);
 			this.setLifes(this.getLifes() - 1);
 			core.setNotAvailable();
 		}

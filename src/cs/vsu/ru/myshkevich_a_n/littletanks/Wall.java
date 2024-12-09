@@ -7,6 +7,14 @@ public class Wall extends Cell {
 		this.setLifes(3);
 	}
 
+	public Wall(int row, int col) {
+		this.setCol(col);
+		this.setRow(row);
+		this.setSymbol(Global.wallSymbol);
+		this.setAvailable(false);
+		this.setLifes(3);
+	}
+
 	@Override
 	public char getSymbol() {
 		String s = Integer.toString(this.getLifes());
@@ -15,14 +23,10 @@ public class Wall extends Cell {
 
 	@Override
 	public Cell setDestroy(Core core) {
-		this.setCore(null);
 		this.setLifes(this.getLifes() - 1);
 		core.setNotAvailable();
 		if (this.getLifes() == 0) {
 			Empty e = new Empty();
-			e.setCol(this.getCol());
-			e.setRow(this.getRow());
-			e.setCore(null);
 			return e;
 		}
 		return this;
