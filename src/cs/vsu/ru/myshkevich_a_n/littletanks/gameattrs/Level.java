@@ -16,12 +16,12 @@ public class Level {
 
 	public Level(String s) {
 		try {
-			reader = new JsonReader(new FileReader("src//cs//vsu//ru//myshkevich_a_n//files//levels.json"));
+			reader = new JsonReader(new FileReader("src//cs//vsu//ru//myshkevich_a_n//files//" + s + ".json"));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 		jsonObject = gson.fromJson(reader, JsonObject.class);
-		jsonArray = jsonObject.getAsJsonArray(s);
+		jsonArray = jsonObject.getAsJsonArray("lvl");
 	}
 
 	public char getCell(int i, int j) {
