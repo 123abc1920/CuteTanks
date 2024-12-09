@@ -91,8 +91,7 @@ public class World {
 	}
 
 	public void addCore(Tank tank) {
-		Core core = new Core(tank.getRow() + tank.getTarget().changeRowsCols()[0],
-				tank.getCol() + tank.getTarget().changeRowsCols()[1], tank.target, tank.isEnemy());
+		Core core = new Core(tank.getRow(), tank.getCol(), tank.target, tank.isEnemy());
 		if (core.getRow() >= 0 && core.getRow() <= Global.size - 1 && core.getCol() >= 0
 				&& core.getCol() <= Global.size - 1) {
 			cores.add(core);
@@ -117,6 +116,14 @@ public class World {
 			Enemy p = (Enemy) iteratorE.next();
 			if (p.getKilled()) {
 				iteratorE.remove();
+			}
+		}
+
+		Iterator<Core> iteratorC = cores.iterator();
+		while (iteratorC.hasNext()) {
+			Core c = (Core) iteratorC.next();
+			if (!c.getAvailable()) {
+				iteratorC.remove();
 			}
 		}
 
@@ -157,27 +164,27 @@ public class World {
 	}
 
 	private void coresMove() {
-		/*
-		 * while (cores.size() > 0) { Iterator<Core> iterator = cores.iterator(); while
-		 * (iterator.hasNext()) { Core core = iterator.next(); if (core.getAvailable())
-		 * { if (core.getRow() >= 0 && core.getRow() <= Global.size - 1 && core.getCol()
-		 * >= 0 && core.getCol() <= Global.size - 1) { shot(core); } else {
-		 * core.setNotAvailable(); } } if (!core.getAvailable()) { if (core.getRow() >=
-		 * 0 && core.getRow() <= Global.size - 1 && core.getCol() >= 0 && core.getCol()
-		 * <= Global.size - 1) { this.world.getCell(core.getRow(),
-		 * core.getCol()).setCore(null); } iterator.remove(); } } }
-		 */
+		for (Core c : cores) {
+			int newRow = c.getRow() + c.getTarget().changeRowsCols()[0];
+			int newCol = c.getCol() + c.getTarget().changeRowsCols()[1];
+			if (newRow < 0 || newRow >= Global.size || newCol < 0 || newCol >= Global.size) {
+				c.setNotAvailable();
+			}
+			if (c.getAvailable()) {
+				c.setRow(newRow);
+				c.setCol(newCol);
+				if (getCells(board[c.getRow()][c.getCol()]).setDestroy(c.getFromEnemy())) {
+					c.setNotAvailable();
+				}
+			}
+		}
 	}
 
-	private void shot(Core core) {
-		/*
-		 * this.world.getCell(core.getRow(), core.getCol()).setCore(null);
-		 * core.setRow(core.getRow() + core.getTarget().changeRowsCols()[0]);
-		 * core.setCol(core.getCol() + core.getTarget().changeRowsCols()[1]); if
-		 * (core.getRow() >= 0 && core.getRow() <= Global.size - 1 && core.getCol() >= 0
-		 * && core.getCol() <= Global.size - 1) { this.world.getCell(core.getRow(),
-		 * core.getCol()).setCore(core); } else { core.setNotAvailable(); return; }
-		 */
+	public Cell getCells(int index) {
+		if (index != -1) {
+			return this.cells.get(index);
+		}
+		return new Empty();
 	}
 
 	private void move(char c, Tank tank) {
@@ -186,16 +193,21 @@ public class World {
 		int newRow = Math.max(0, Math.min(tank.getRow() + tank.getTarget().changeRowsCols()[0], Global.size - 1));
 		int newCol = Math.max(0, Math.min(tank.getCol() + tank.getTarget().changeRowsCols()[1], Global.size - 1));
 
-		if (getCellAvailable(board[newRow][newCol]) && getCellHasTank(newRow, newCol)) {
+		if (getCellAvailable(board[newRow][newCol]) && !getCellHasTank(newRow, newCol)
+				&& !getCellHasCore(newRow, newCol)) {
 			tank.setRow(newRow);
 			tank.setCol(newCol);
 		}
 
-		// addCore(tank);
+		addCore(tank);
+	}
+
+	private boolean getCellHasCore(int row, int col) {
+		return cores.stream().anyMatch(e -> e.getCol() == col && e.getRow() == row);
 	}
 
 	private boolean getCellHasTank(int row, int col) {
-		return !Stream.concat(enemies.stream(), players.stream()).anyMatch(e -> e.getCol() == col && e.getRow() == row);
+		return Stream.concat(enemies.stream(), players.stream()).anyMatch(e -> e.getCol() == col && e.getRow() == row);
 	}
 
 	private boolean getCellAvailable(int index) {

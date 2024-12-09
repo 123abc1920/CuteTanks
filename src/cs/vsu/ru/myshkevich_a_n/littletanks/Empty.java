@@ -12,6 +12,11 @@ public class Empty extends Cell {
 	}
 
 	@Override
+	public boolean setDestroy(boolean getFromEnemy) {
+		return false;
+	}
+
+	@Override
 	public boolean getAvailable() {
 		return true;
 	}

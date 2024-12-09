@@ -8,9 +8,10 @@ public class Global {
     public static final char waterSymbol = '~';
     public static final char treeSymbol = '@';
     public static final char flagSymbol = '$';
-    public static final char spawnerSymbol = 'X';
+    public static final char spawnerSymbol = 'I';
     public static final char emptySymbol = '.';
-    public static final char coreSymbol = 'O';
+    public static final char corePlayerSymbol = 'O';
+    public static final char coreEnemySymbol = 'X';
 
     public static int size = 13;
 

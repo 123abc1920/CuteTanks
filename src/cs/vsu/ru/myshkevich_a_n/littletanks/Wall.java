@@ -17,19 +17,20 @@ public class Wall extends Cell {
 
 	@Override
 	public char getSymbol() {
+		if (this.getLifes() <= 0) {
+			return '.';
+		}
 		String s = Integer.toString(this.getLifes());
 		return s.charAt(0);
 	}
 
 	@Override
-	public Cell setDestroy(Core core) {
-		this.setLifes(this.getLifes() - 1);
-		core.setNotAvailable();
-		if (this.getLifes() == 0) {
-			Empty e = new Empty();
-			return e;
+	public boolean setDestroy(boolean getFromEnemy) {
+		if (this.getLifes() <= 0) {
+			return false;
 		}
-		return this;
+		this.setLifes(this.getLifes() - 1);
+		return true;
 	}
 
 	@Override

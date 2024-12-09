@@ -12,13 +12,12 @@ public class Tree extends Cell {
 	}
 
 	@Override
-	public Cell setDestroy(Core core) {
-		core.setNotAvailable();
-		return this;
-	}
-	
-	@Override
 	public boolean getAvailable() {
+		return true;
+	}
+
+	@Override
+	public boolean setDestroy(boolean getFromEnemy) {
 		return true;
 	}
 

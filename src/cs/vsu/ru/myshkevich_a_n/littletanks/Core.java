@@ -2,7 +2,6 @@ package cs.vsu.ru.myshkevich_a_n.littletanks;
 
 public class Core {
 	private int row, col;
-	private static final char symbol = Global.coreSymbol;
 	private Target target;
 	private boolean isAvailable = true;
 	private boolean fromEnemy = false;
@@ -24,7 +23,10 @@ public class Core {
 	}
 
 	public char getSymbol() {
-		return symbol;
+		if (this.fromEnemy) {
+			return Global.coreEnemySymbol;
+		}
+		return Global.corePlayerSymbol;
 	}
 
 	public void setCol(int col) {

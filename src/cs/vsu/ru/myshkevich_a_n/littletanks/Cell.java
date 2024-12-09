@@ -51,7 +51,7 @@ public abstract class Cell {
 		this.lifes = lifes;
 	}
 
-	public Cell setDestroy(Core core) {
-		return this;
+	public boolean setDestroy(boolean getFromEnemy) {
+		return false;
 	}
 }

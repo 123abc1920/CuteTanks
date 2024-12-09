@@ -15,12 +15,12 @@ public class Spawner extends Cell {
 	}
 
 	@Override
-	public Cell setDestroy(Core core) {
-		if (!core.getFromEnemy()) {
+	public boolean setDestroy(boolean getFromEnemy) {
+		if (!getFromEnemy) {
 			this.setLifes(this.getLifes() - 1);
-			core.setNotAvailable();
+			return true;
 		}
-		return this;
+		return false;
 	}
 
 }
