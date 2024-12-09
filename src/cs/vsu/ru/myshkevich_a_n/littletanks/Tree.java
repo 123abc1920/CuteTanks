@@ -16,5 +16,10 @@ public class Tree extends Cell {
 		core.setNotAvailable();
 		return this;
 	}
+	
+	@Override
+	public boolean getAvailable() {
+		return true;
+	}
 
 }

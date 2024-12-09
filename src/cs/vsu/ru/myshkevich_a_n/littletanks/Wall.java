@@ -32,4 +32,12 @@ public class Wall extends Cell {
 		return this;
 	}
 
+	@Override
+	public boolean getAvailable() {
+		if (this.getLifes() <= 0) {
+			return true;
+		}
+		return false;
+	}
+
 }

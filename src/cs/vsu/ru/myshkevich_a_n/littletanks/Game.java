@@ -1,10 +1,5 @@
 package cs.vsu.ru.myshkevich_a_n.littletanks;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Game {

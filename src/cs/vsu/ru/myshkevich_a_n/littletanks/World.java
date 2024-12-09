@@ -187,20 +187,21 @@ public class World {
 			tank.setCol(newCol);
 		}
 
-		addCore(tank);
+		// addCore(tank);
 	}
 
 	public boolean getCellAvailable(int index) {
 		if (index < cells.size() && index >= 0) {
 			return this.cells.get(index).getAvailable();
 		}
-		return false;
+		return true;
 	}
 
 	public void spawnEnemy(boolean isEnemy) {
 		if (isEnemy) {
 			Enemy enemy = new Enemy(0, (Global.size - 1) / 2, Target.BOTTOM);
 			this.enemies.add(enemy);
+			return;
 		}
 		Player player = new Player(Global.size - 1, (Global.size - 1) / 2, Target.TOP);
 		this.players.add(player);
