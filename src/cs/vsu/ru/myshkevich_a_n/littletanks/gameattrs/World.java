@@ -1,12 +1,17 @@
 package cs.vsu.ru.myshkevich_a_n.littletanks.gameattrs;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
+import cs.vsu.ru.myshkevich_a_n.littletanks.bonuses.Bonus;
+import cs.vsu.ru.myshkevich_a_n.littletanks.bonuses.ActiveBomb;
+import cs.vsu.ru.myshkevich_a_n.littletanks.bonuses.AddArmor;
+import cs.vsu.ru.myshkevich_a_n.littletanks.bonuses.AddLifeBonus;
 import cs.vsu.ru.myshkevich_a_n.littletanks.cells.Cell;
 import cs.vsu.ru.myshkevich_a_n.littletanks.cells.Empty;
 import cs.vsu.ru.myshkevich_a_n.littletanks.cells.Flag;
@@ -25,6 +30,7 @@ public class World {
 	private List<Core> cores = new ArrayList<>();
 	private List<Cell> cells = new ArrayList<>();
 	private List<Player> players = new ArrayList<>();
+	private List<Bonus> bonuses = new ArrayList<>();
 
 	private Flag flag;
 	private Spawner spawner;
@@ -42,6 +48,8 @@ public class World {
 			for (int j = 0; j < Global.size; j++) {
 				char c = lvl.getCell(i, j);
 				if (c != '.') {
+					board[i][j] = index;
+					index++;
 					if (c == '#') {
 						cells.add(new Wall(i, j));
 					} else if (c == '$') {
@@ -54,9 +62,19 @@ public class World {
 						cells.add(new Tree(i, j));
 					} else if (c == '~') {
 						cells.add(new Water(i, j));
+					} else if (c == Global.activeBombSymbol) {
+						bonuses.add(new ActiveBomb(i, j));
+						index--;
+						board[i][j] = -1;
+					} else if (c == Global.armorSymbol) {
+						bonuses.add(new AddArmor(i, j));
+						index--;
+						board[i][j] = -1;
+					} else if (c == Global.lifeSymbol) {
+						bonuses.add(new AddLifeBonus(i, j));
+						index--;
+						board[i][j] = -1;
 					}
-					board[i][j] = index;
-					index++;
 				} else {
 					board[i][j] = -1;
 				}
@@ -72,6 +90,10 @@ public class World {
 		Core core = this.getCore(row, col);
 		if (core != null) {
 			return core.getSymbol();
+		}
+		Bonus b = this.getBonus(row, col);
+		if (b != null) {
+			return b.getSymbol();
 		}
 		return this.getCell(row, col).getSymbol();
 	}
@@ -230,7 +252,22 @@ public class World {
 			tank.setCol(newCol);
 		}
 
+		Bonus b = getBonus(newRow, newCol);
+		if (b != null) {
+			b.setEffect(tank);
+			bonuses.remove(b);
+		}
+
 		addCore(tank);
+	}
+
+	private Bonus getBonus(int row, int col) {
+		for (Bonus b : bonuses) {
+			if (b.getCol() == col && b.getRow() == row) {
+				return b;
+			}
+		}
+		return null;
 	}
 
 	private boolean getCellHasCore(int row, int col) {
@@ -256,6 +293,14 @@ public class World {
 		}
 		Player player = new Player(Global.size - 1, (Global.size - 1) / 2, Target.TOP);
 		this.players.add(player);
+	}
+
+	public String getLifes() {
+		int[] lifes = new int[players.size()];
+		for (Tank p : players) {
+			lifes[players.indexOf(p)] = p.getLife();
+		}
+		return Arrays.toString(lifes).replace("[", "").replace("]", "");
 	}
 
 }

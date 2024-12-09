@@ -1,16 +1,10 @@
 package cs.vsu.ru.myshkevich_a_n.littletanks.bonuses;
 
+import cs.vsu.ru.myshkevich_a_n.littletanks.tanks.Tank;
+
 public abstract class Bonus {
 	private int row, col;
-
-	public Bonus() {
-
-	}
-
-	public Bonus(int row, int col) {
-		this.row = row;
-		this.col = col;
-	}
+	private char symbol;
 
 	public void setRow(int row) {
 		this.row = row;
@@ -28,7 +22,15 @@ public abstract class Bonus {
 		return col;
 	}
 	
-	public void setEffect() {
-		
+	public void setSymbol(char symbol) {
+		this.symbol = symbol;
+	}
+	
+	public char getSymbol() {
+		return symbol;
+	}
+
+	public void setEffect(Tank tank) {
+
 	}
 }

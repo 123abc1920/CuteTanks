@@ -15,6 +15,8 @@ public abstract class Tank {
 
 	public boolean isKilled = false;
 
+	private int armor = 0;
+
 	public Target getTarget() {
 		return target;
 	}
@@ -98,7 +100,7 @@ public abstract class Tank {
 	}
 
 	public void setLife(int life) {
-		this.lifes = life;
+		this.lifes += life;
 	}
 
 	public boolean getKilled() {
@@ -107,6 +109,18 @@ public abstract class Tank {
 
 	public boolean setDestroy(boolean getFromEnemy) {
 		return true;
+	}
+
+	public int getArmor() {
+		return armor;
+	}
+
+	public void setArmor(int armor) {
+		this.armor = armor;
+	}
+
+	public void addArmor(int a) {
+		this.armor += a;
 	}
 
 	public abstract boolean isEnemy();

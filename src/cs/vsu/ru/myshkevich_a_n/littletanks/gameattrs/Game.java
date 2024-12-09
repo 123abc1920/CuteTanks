@@ -43,12 +43,7 @@ public class Game {
 	}
 
 	public String getLifes() {
-		/*
-		 * int[] lifes = new int[players.size()]; for (Tank p : players) {
-		 * lifes[players.indexOf(p)] = p.getLife(); } return
-		 * Arrays.toString(lifes).replace("[", "").replace("]", "");
-		 */
-		return "";
+		return world.getLifes();
 	}
 
 	public void gameStep() {

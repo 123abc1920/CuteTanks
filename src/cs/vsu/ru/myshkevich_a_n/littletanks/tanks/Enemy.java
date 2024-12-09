@@ -22,7 +22,11 @@ public class Enemy extends Tank {
 
 	@Override
 	public boolean setDestroy(boolean getFromEnemy) {
-		if (getFromEnemy) {
+		if (!getFromEnemy) {
+			if (this.getArmor() >= 0) {
+				this.setArmor(this.getArmor() - 1);
+				return true;
+			}
 			this.setLife(this.getLife() - 1);
 			if (this.getLife() <= 0) {
 				this.isKilled = true;

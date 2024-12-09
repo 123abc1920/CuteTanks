@@ -12,6 +12,10 @@ public class Global {
     public static final char emptySymbol = '.';
     public static final char corePlayerSymbol = 'O';
     public static final char coreEnemySymbol = 'X';
+    
+    public static final char activeBombSymbol = 'Q';
+    public static final char armorSymbol = 'D';
+    public static final char lifeSymbol = 'L';
 
     public static int size = 13;
 
