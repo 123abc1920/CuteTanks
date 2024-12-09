@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class World {
 	private List<Enemy> enemies = new ArrayList<>();
@@ -19,6 +20,7 @@ public class World {
 	public World(Level lvl) {
 		players.add(new Player(Global.size - 1, (Global.size - 1) / 2, Target.TOP));
 		enemies.add(new Enemy(0, (Global.size - 1) / 2, Target.BOTTOM));
+
 		int index = 0;
 		for (int i = 0; i < Global.size; i++) {
 			for (int j = 0; j < Global.size; j++) {
@@ -32,6 +34,8 @@ public class World {
 						cells.add(new Spawner(i, j));
 					} else if (c == '@') {
 						cells.add(new Tree(i, j));
+					} else if (c == '~') {
+						cells.add(new Water(i, j));
 					}
 					board[i][j] = index;
 					index++;
@@ -182,7 +186,7 @@ public class World {
 		int newRow = Math.max(0, Math.min(tank.getRow() + tank.getTarget().changeRowsCols()[0], Global.size - 1));
 		int newCol = Math.max(0, Math.min(tank.getCol() + tank.getTarget().changeRowsCols()[1], Global.size - 1));
 
-		if (getCellAvailable(board[newRow][newCol])) {
+		if (getCellAvailable(board[newRow][newCol]) && getCellHasTank(newRow, newCol)) {
 			tank.setRow(newRow);
 			tank.setCol(newCol);
 		}
@@ -190,8 +194,12 @@ public class World {
 		// addCore(tank);
 	}
 
-	public boolean getCellAvailable(int index) {
-		if (index < cells.size() && index >= 0) {
+	private boolean getCellHasTank(int row, int col) {
+		return !Stream.concat(enemies.stream(), players.stream()).anyMatch(e -> e.getCol() == col && e.getRow() == row);
+	}
+
+	private boolean getCellAvailable(int index) {
+		if (index != -1) {
 			return this.cells.get(index).getAvailable();
 		}
 		return true;

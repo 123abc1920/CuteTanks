@@ -5,5 +5,17 @@ public class Water extends Cell {
 		this.setSymbol(Global.waterSymbol);
 		this.setAvailable(false);
 	}
-	
+
+	public Water(int row, int col) {
+		this.setCol(col);
+		this.setRow(row);
+		this.setSymbol(Global.waterSymbol);
+		this.setAvailable(false);
+	}
+
+	@Override
+	public boolean getAvailable() {
+		return false;
+	}
+
 }

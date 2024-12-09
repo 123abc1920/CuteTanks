@@ -10,4 +10,9 @@ public class Empty extends Cell {
 		this.setRow(row);
 		this.setCol(col);
 	}
+
+	@Override
+	public boolean getAvailable() {
+		return true;
+	}
 }
