@@ -182,6 +182,17 @@ public class World {
 				c.setCol(newCol);
 				if (getCells(board[c.getRow()][c.getCol()]).setDestroy(c.getFromEnemy())) {
 					c.setNotAvailable();
+				} else {
+					for (Tank t : enemies) {
+						if (t.getCol() == c.getCol() && t.getRow() == c.getRow()) {
+							t.setDestroy(c.getFromEnemy());
+						}
+					}
+					for (Tank t : players) {
+						if (t.getCol() == c.getCol() && t.getRow() == c.getRow()) {
+							t.setDestroy(c.getFromEnemy());
+						}
+					}
 				}
 			}
 		}

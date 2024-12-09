@@ -13,9 +13,20 @@ public class Player extends Tank {
 		this.setSymbolLeft(Global.getLeftPlayerSymbol());
 		this.setSymbolRight(Global.getRightPlayerSymbol());
 	}
-	
+
 	@Override
 	public boolean isEnemy() {
 		return false;
+	}
+
+	@Override
+	public boolean setDestroy(boolean getFromEnemy) {
+		if (!getFromEnemy) {
+			this.setLife(this.getLife() - 1);
+			if (this.getLife() <= 0) {
+				this.isKilled = true;
+			}
+		}
+		return true;
 	}
 }
