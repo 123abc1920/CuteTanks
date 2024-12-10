@@ -19,7 +19,7 @@ import cs.vsu.ru.myshkevich_a_n.littletanks.cells.Spawner;
 import cs.vsu.ru.myshkevich_a_n.littletanks.cells.Tree;
 import cs.vsu.ru.myshkevich_a_n.littletanks.cells.Wall;
 import cs.vsu.ru.myshkevich_a_n.littletanks.cells.Water;
-import cs.vsu.ru.myshkevich_a_n.littletanks.tanks.Core;
+import cs.vsu.ru.myshkevich_a_n.littletanks.cores.Core;
 import cs.vsu.ru.myshkevich_a_n.littletanks.tanks.Enemy;
 import cs.vsu.ru.myshkevich_a_n.littletanks.tanks.Player;
 import cs.vsu.ru.myshkevich_a_n.littletanks.tanks.Tank;
@@ -55,7 +55,7 @@ public class World {
 					} else if (c == '$') {
 						flag = new Flag(i, j);
 						cells.add(flag);
-					} else if (c == 'X') {
+					} else if (c == Global.spawnerSymbol) {
 						spawner = new Spawner(i, j);
 						cells.add(spawner);
 					} else if (c == '@') {
@@ -131,7 +131,7 @@ public class World {
 	}
 
 	public void addCore(Tank tank) {
-		Core core = new Core(tank.getRow(), tank.getCol(), tank.getTarget(), tank.isEnemy());
+		Core core = new Core(tank.getRow(), tank.getCol(), tank.getTarget(), tank.isEnemy(), tank.getCoreVelocity());
 		if (core.getRow() >= 0 && core.getRow() <= Global.size - 1 && core.getCol() >= 0
 				&& core.getCol() <= Global.size - 1) {
 			cores.add(core);
@@ -196,7 +196,7 @@ public class World {
 	}
 
 	private void enemiesMove() {
-		char d = '0';
+		char d;
 
 		Random rnd = new Random();
 		for (Tank e : enemies) {
@@ -207,8 +207,8 @@ public class World {
 
 	private void coresMove() {
 		for (Core c : cores) {
-			int newRow = c.getRow() + c.getTarget().changeRowsCols()[0];
-			int newCol = c.getCol() + c.getTarget().changeRowsCols()[1];
+			int newRow = c.getRow() + c.getTarget().changeRowsCols()[0] * c.getVelocity();
+			int newCol = c.getCol() + c.getTarget().changeRowsCols()[1] * c.getVelocity();
 			if (newRow < 0 || newRow >= Global.size || newCol < 0 || newCol >= Global.size) {
 				c.setNotAvailable();
 			}
@@ -218,14 +218,16 @@ public class World {
 				if (getCells(board[c.getRow()][c.getCol()]).setDestroy(c.getFromEnemy())) {
 					c.setNotAvailable();
 				} else {
-					for (Tank t : enemies) {
-						if (t.getCol() == c.getCol() && t.getRow() == c.getRow()) {
-							t.setDestroy(c.getFromEnemy());
-						}
-					}
-					for (Tank t : players) {
-						if (t.getCol() == c.getCol() && t.getRow() == c.getRow()) {
-							t.setDestroy(c.getFromEnemy());
+					Tank t = getTank(c.getRow(), c.getCol());
+					if (t != null) {
+						t.setDestroy(c.getFromEnemy());
+					} else {
+						Core c2 = getCore(c.getRow(), c.getCol());
+						if (c2 != null) {
+							if (c2.getFromEnemy() != c.getFromEnemy()) {
+								c2.setNotAvailable();
+								c.setNotAvailable();
+							}
 						}
 					}
 				}
@@ -246,8 +248,7 @@ public class World {
 		int newRow = Math.max(0, Math.min(tank.getRow() + tank.getTarget().changeRowsCols()[0], Global.size - 1));
 		int newCol = Math.max(0, Math.min(tank.getCol() + tank.getTarget().changeRowsCols()[1], Global.size - 1));
 
-		if (getCellAvailable(board[newRow][newCol]) && !getCellHasTank(newRow, newCol)
-				&& !getCellHasCore(newRow, newCol)) {
+		if (getCells(board[newRow][newCol]).getAvailable() && !getCellHasTank(newRow, newCol)) {
 			tank.setRow(newRow);
 			tank.setCol(newCol);
 		}
@@ -270,19 +271,8 @@ public class World {
 		return null;
 	}
 
-	private boolean getCellHasCore(int row, int col) {
-		return cores.stream().anyMatch(e -> e.getCol() == col && e.getRow() == row);
-	}
-
 	private boolean getCellHasTank(int row, int col) {
 		return Stream.concat(enemies.stream(), players.stream()).anyMatch(e -> e.getCol() == col && e.getRow() == row);
-	}
-
-	private boolean getCellAvailable(int index) {
-		if (index != -1) {
-			return this.cells.get(index).getAvailable();
-		}
-		return true;
 	}
 
 	public void spawnEnemy(boolean isEnemy) {
@@ -301,6 +291,22 @@ public class World {
 			lifes[players.indexOf(p)] = p.getLife();
 		}
 		return Arrays.toString(lifes).replace("[", "").replace("]", "");
+	}
+
+	public String getArmours() {
+		int[] armours = new int[players.size()];
+		for (Tank p : players) {
+			armours[players.indexOf(p)] = p.getArmor();
+		}
+		return Arrays.toString(armours).replace("[", "").replace("]", "");
+	}
+
+	public String getVelocities() {
+		int[] velicities = new int[players.size()];
+		for (Tank p : players) {
+			velicities[players.indexOf(p)] = p.getCoreVelocity();
+		}
+		return Arrays.toString(velicities).replace("[", "").replace("]", "");
 	}
 
 }

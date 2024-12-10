@@ -7,20 +7,20 @@ import cs.vsu.ru.myshkevich_a_n.littletanks.tanks.Player;
 import cs.vsu.ru.myshkevich_a_n.littletanks.tanks.Tank;
 
 public class AddLifeBonus extends Bonus {
-	private Random r = new Random();
-	private int lifePoints;
+    private Random r = new Random();
+    private int lifePoints;
 
-	public AddLifeBonus(int row, int col) {
-		this.setRow(row);
-		this.setCol(col);
-		this.setSymbol(Global.lifeSymbol);
+    public AddLifeBonus(int row, int col) {
+        this.setRow(row);
+        this.setCol(col);
+        this.setSymbol(Global.lifeSymbol);
 
-		this.lifePoints = r.nextInt(4);
-	}
+        this.lifePoints = r.nextInt(3) + 1;
+    }
 
-	@Override
-	public void setEffect(Tank tank) {
-		tank.setLife(lifePoints);
-	}
+    @Override
+    public void setEffect(Tank tank) {
+        tank.setLife(lifePoints);
+    }
 
 }

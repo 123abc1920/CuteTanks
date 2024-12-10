@@ -1,19 +1,22 @@
-package cs.vsu.ru.myshkevich_a_n.littletanks.tanks;
+package cs.vsu.ru.myshkevich_a_n.littletanks.cores;
 
 import cs.vsu.ru.myshkevich_a_n.littletanks.gameattrs.Global;
+import cs.vsu.ru.myshkevich_a_n.littletanks.tanks.Target;
 
 public class Core {
 	private int row, col;
 	private Target target;
 	private boolean isAvailable = true;
 	private boolean fromEnemy = false;
+	private int velocity = 1;
 
-	public Core(int row, int col, Target target, boolean fromEnemy) {
+	public Core(int row, int col, Target target, boolean fromEnemy, int velocity) {
 		this.target = target;
 		this.row = row;
 		this.col = col;
 		this.isAvailable = true;
 		this.fromEnemy = fromEnemy;
+		this.velocity = velocity;
 	}
 
 	public int getCol() {
@@ -41,6 +44,14 @@ public class Core {
 		if (this.isAvailable) {
 			this.row = row;
 		}
+	}
+
+	public int getVelocity() {
+		return velocity;
+	}
+
+	public void setVelocity(int velocity) {
+		this.velocity = velocity;
 	}
 
 	public Target getTarget() {

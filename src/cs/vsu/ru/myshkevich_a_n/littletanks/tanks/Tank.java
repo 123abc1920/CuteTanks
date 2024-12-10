@@ -3,126 +3,136 @@ package cs.vsu.ru.myshkevich_a_n.littletanks.tanks;
 import cs.vsu.ru.myshkevich_a_n.littletanks.gameattrs.Global;
 
 public abstract class Tank {
-	private char symbolUp;
-	private char symbolLeft;
-	private char symbolRight;
-	private char symbolDown;
+    private char symbolUp;
+    private char symbolLeft;
+    private char symbolRight;
+    private char symbolDown;
 
-	private int row, col;
-	private int lifes = 1;
+    private int row, col;
+    private int lifes = 1;
 
-	protected Target target;
+    private int coreVelocity;
 
-	public boolean isKilled = false;
+    protected Target target;
 
-	private int armor = 0;
+    public boolean isKilled = false;
 
-	public Target getTarget() {
-		return target;
-	}
+    private int armor = 0;
 
-	public char getSymbolDown() {
-		return symbolDown;
-	}
+    public Target getTarget() {
+        return target;
+    }
 
-	public char getSymbolLeft() {
-		return symbolLeft;
-	}
+    public char getSymbolDown() {
+        return symbolDown;
+    }
 
-	public char getSymbolRight() {
-		return symbolRight;
-	}
+    public char getSymbolLeft() {
+        return symbolLeft;
+    }
 
-	public char getSymbolUp() {
-		return symbolUp;
-	}
+    public char getSymbolRight() {
+        return symbolRight;
+    }
 
-	public void setTarget(Target target) {
-		this.target = target;
-	}
+    public char getSymbolUp() {
+        return symbolUp;
+    }
 
-	public void setSymbolDown(char symbolDown) {
-		this.symbolDown = symbolDown;
-	}
+    public void setTarget(Target target) {
+        this.target = target;
+    }
 
-	public void setSymbolLeft(char symbolLeft) {
-		this.symbolLeft = symbolLeft;
-	}
+    public void setSymbolDown(char symbolDown) {
+        this.symbolDown = symbolDown;
+    }
 
-	public void setSymbolRight(char symbolRight) {
-		this.symbolRight = symbolRight;
-	}
+    public void setSymbolLeft(char symbolLeft) {
+        this.symbolLeft = symbolLeft;
+    }
 
-	public void setSymbolUp(char symbolUp) {
-		this.symbolUp = symbolUp;
-	}
+    public void setSymbolRight(char symbolRight) {
+        this.symbolRight = symbolRight;
+    }
 
-	public char getSymbol() {
-		if (this.target == Target.TOP) {
-			return this.getSymbolUp();
-		}
-		if (this.target == Target.BOTTOM) {
-			return this.getSymbolDown();
-		}
-		if (this.target == Target.RIGHT) {
-			return this.getSymbolLeft();
-		}
-		if (this.target == Target.LEFT) {
-			return this.getSymbolRight();
-		}
-		return 'u';
-	}
+    public void setSymbolUp(char symbolUp) {
+        this.symbolUp = symbolUp;
+    }
 
-	public int getCol() {
-		return col;
-	}
+    public char getSymbol() {
+        if (this.target == Target.TOP) {
+            return this.getSymbolUp();
+        }
+        if (this.target == Target.BOTTOM) {
+            return this.getSymbolDown();
+        }
+        if (this.target == Target.RIGHT) {
+            return this.getSymbolLeft();
+        }
+        if (this.target == Target.LEFT) {
+            return this.getSymbolRight();
+        }
+        return 'u';
+    }
 
-	public int getRow() {
-		return row;
-	}
+    public int getCol() {
+        return col;
+    }
 
-	public void setCol(int col) {
-		if (col > Global.size - 1 || col < 0) {
-			return;
-		}
-		this.col = col;
-	}
+    public int getRow() {
+        return row;
+    }
 
-	public void setRow(int row) {
-		if (row > Global.size - 1 || row < 0) {
-			return;
-		}
-		this.row = row;
-	}
+    public void setCol(int col) {
+        if (col > Global.size - 1 || col < 0) {
+            return;
+        }
+        this.col = col;
+    }
 
-	public int getLife() {
-		return this.lifes;
-	}
+    public void setRow(int row) {
+        if (row > Global.size - 1 || row < 0) {
+            return;
+        }
+        this.row = row;
+    }
 
-	public void setLife(int life) {
-		this.lifes += life;
-	}
+    public int getLife() {
+        return this.lifes;
+    }
 
-	public boolean getKilled() {
-		return isKilled;
-	}
+    public void setLife(int life) {
+        this.lifes += life;
+    }
 
-	public boolean setDestroy(boolean getFromEnemy) {
-		return true;
-	}
+    public boolean getKilled() {
+        return isKilled;
+    }
 
-	public int getArmor() {
-		return armor;
-	}
+    public boolean setDestroy(boolean getFromEnemy) {
+        return false;
+    }
 
-	public void setArmor(int armor) {
-		this.armor = armor;
-	}
+    public int getArmor() {
+        return armor;
+    }
 
-	public void addArmor(int a) {
-		this.armor += a;
-	}
+    public void setArmor(int armor) {
+        this.armor = armor;
+    }
 
-	public abstract boolean isEnemy();
+    public void addArmor(int a) {
+        this.armor += a;
+    }
+
+    public int getCoreVelocity() {
+        return coreVelocity;
+    }
+
+    public void setCoreVelocity(int coreVelocity) {
+        this.coreVelocity = coreVelocity;
+    }
+
+    public abstract boolean isEnemy();
 
 }
