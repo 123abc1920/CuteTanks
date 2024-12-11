@@ -16,11 +16,6 @@ public class Flag extends Cell {
 		this.setLifes(1);
 	}
 
-	/*
-	 * @Override public Cell setDestroy(Core core) { if (core.getFromEnemy()) {
-	 * this.setLifes(this.getLifes() - 1); core.setNotAvailable(); } return this; }
-	 */
-
 	@Override
 	public boolean setDestroy(boolean getFromEnemy) {
 		if (getFromEnemy) {

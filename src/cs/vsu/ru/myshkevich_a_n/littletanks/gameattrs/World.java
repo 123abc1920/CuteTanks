@@ -9,16 +9,12 @@ import java.util.Scanner;
 import java.util.stream.Stream;
 
 import cs.vsu.ru.myshkevich_a_n.littletanks.bonuses.Bonus;
-import cs.vsu.ru.myshkevich_a_n.littletanks.bonuses.ActiveBomb;
-import cs.vsu.ru.myshkevich_a_n.littletanks.bonuses.AddArmor;
-import cs.vsu.ru.myshkevich_a_n.littletanks.bonuses.AddLifeBonus;
+import cs.vsu.ru.myshkevich_a_n.littletanks.bonuses.BonusFabric;
 import cs.vsu.ru.myshkevich_a_n.littletanks.cells.Cell;
+import cs.vsu.ru.myshkevich_a_n.littletanks.cells.CellFabric;
 import cs.vsu.ru.myshkevich_a_n.littletanks.cells.Empty;
 import cs.vsu.ru.myshkevich_a_n.littletanks.cells.Flag;
 import cs.vsu.ru.myshkevich_a_n.littletanks.cells.Spawner;
-import cs.vsu.ru.myshkevich_a_n.littletanks.cells.Tree;
-import cs.vsu.ru.myshkevich_a_n.littletanks.cells.Wall;
-import cs.vsu.ru.myshkevich_a_n.littletanks.cells.Water;
 import cs.vsu.ru.myshkevich_a_n.littletanks.cores.Core;
 import cs.vsu.ru.myshkevich_a_n.littletanks.tanks.Enemy;
 import cs.vsu.ru.myshkevich_a_n.littletanks.tanks.Player;
@@ -47,39 +43,22 @@ public class World {
 		for (int i = 0; i < Global.size; i++) {
 			for (int j = 0; j < Global.size; j++) {
 				char c = lvl.getCell(i, j);
-				if (c != '.') {
+				Cell newCell = CellFabric.createCell(c, i, j);
+				if (newCell != null) {
 					board[i][j] = index;
 					index++;
-					if (c == '#') {
-						cells.add(new Wall(i, j));
-					} else if (c == '$') {
-						flag = new Flag(i, j);
-						cells.add(flag);
-					} else if (c == Global.spawnerSymbol) {
-						spawner = new Spawner(i, j);
-						cells.add(spawner);
-					} else if (c == '@') {
-						cells.add(new Tree(i, j));
-					} else if (c == '~') {
-						cells.add(new Water(i, j));
-					} else if (c == Global.activeBombSymbol) {
-						bonuses.add(new ActiveBomb(i, j));
-						index--;
-						board[i][j] = -1;
-					} else if (c == Global.armorSymbol) {
-						bonuses.add(new AddArmor(i, j));
-						index--;
-						board[i][j] = -1;
-					} else if (c == Global.lifeSymbol) {
-						bonuses.add(new AddLifeBonus(i, j));
-						index--;
-						board[i][j] = -1;
-					}
+					cells.add(newCell);
 				} else {
 					board[i][j] = -1;
+					if (c == Global.activeBombSymbol || c == Global.armorSymbol || c == Global.lifeSymbol) {
+						bonuses.add(BonusFabric.createBonus(c, i, j));
+					}
 				}
 			}
 		}
+
+		this.flag = (Flag) cells.get(this.board[Global.size - 1][(Global.size - 1) / 2]);
+		this.spawner = (Spawner) cells.get(this.board[0][(Global.size - 1) / 2]);
 	}
 
 	public char drawCell(int row, int col) {
