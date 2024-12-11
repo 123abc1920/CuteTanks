@@ -1,5 +1,6 @@
 package cs.vsu.ru.myshkevich_a_n.littletanks.cores;
 
+import cs.vsu.ru.myshkevich_a_n.littletanks.Symbol;
 import cs.vsu.ru.myshkevich_a_n.littletanks.gameattrs.Global;
 import cs.vsu.ru.myshkevich_a_n.littletanks.tanks.Target;
 
@@ -76,5 +77,9 @@ public class Core {
 
 	public boolean getFromEnemy() {
 		return this.fromEnemy;
+	}
+
+	public Symbol drawSymbol() {
+		return new Symbol("O O", "O O");
 	}
 }

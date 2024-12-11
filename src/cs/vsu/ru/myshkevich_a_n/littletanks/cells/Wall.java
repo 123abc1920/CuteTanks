@@ -1,5 +1,6 @@
 package cs.vsu.ru.myshkevich_a_n.littletanks.cells;
 
+import cs.vsu.ru.myshkevich_a_n.littletanks.Symbol;
 import cs.vsu.ru.myshkevich_a_n.littletanks.gameattrs.Global;
 
 public class Wall extends Cell {
@@ -41,6 +42,11 @@ public class Wall extends Cell {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public Symbol drawSymbol() {
+		return new Symbol("# #", "# #");
 	}
 
 }

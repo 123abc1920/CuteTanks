@@ -1,5 +1,7 @@
 package cs.vsu.ru.myshkevich_a_n.littletanks.cells;
 
+import cs.vsu.ru.myshkevich_a_n.littletanks.Symbol;
+
 public abstract class Cell {
 	private int row, col;
 	private char symbol;
@@ -54,4 +56,6 @@ public abstract class Cell {
 	public boolean setDestroy(boolean getFromEnemy) {
 		return false;
 	}
+	
+	public abstract Symbol drawSymbol();
 }

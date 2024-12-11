@@ -8,6 +8,7 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
+import cs.vsu.ru.myshkevich_a_n.littletanks.Symbol;
 import cs.vsu.ru.myshkevich_a_n.littletanks.bonuses.Bonus;
 import cs.vsu.ru.myshkevich_a_n.littletanks.bonuses.BonusFabric;
 import cs.vsu.ru.myshkevich_a_n.littletanks.cells.Cell;
@@ -62,20 +63,22 @@ public class World {
 		this.spawner = (Spawner) cells.get(this.board[0][(Global.size - 1) / 2]);
 	}
 
-	public char drawCell(int row, int col) {
+	public Symbol drawCell(int row, int col) {
+
 		Tank t = this.getTank(row, col);
 		if (t != null) {
-			return t.getSymbol();
+			return t.drawSymbol();
 		}
 		Core core = this.getCore(row, col);
 		if (core != null) {
-			return core.getSymbol();
+			return core.drawSymbol();
 		}
 		Bonus b = this.getBonus(row, col);
 		if (b != null) {
-			return b.getSymbol();
+			return b.drawSymbol();
 		}
-		return this.getCell(row, col).getSymbol();
+
+		return this.getCell(row, col).drawSymbol();
 	}
 
 	public Cell getCell(int row, int col) {

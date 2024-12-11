@@ -1,5 +1,6 @@
 package cs.vsu.ru.myshkevich_a_n.littletanks.cells;
 
+import cs.vsu.ru.myshkevich_a_n.littletanks.Symbol;
 import cs.vsu.ru.myshkevich_a_n.littletanks.gameattrs.Global;
 
 public class Empty extends Cell {
@@ -21,5 +22,10 @@ public class Empty extends Cell {
 	@Override
 	public boolean getAvailable() {
 		return true;
+	}
+
+	@Override
+	public Symbol drawSymbol() {
+		return new Symbol(". .", ". .");
 	}
 }

@@ -1,5 +1,6 @@
 package cs.vsu.ru.myshkevich_a_n.littletanks.cells;
 
+import cs.vsu.ru.myshkevich_a_n.littletanks.Symbol;
 import cs.vsu.ru.myshkevich_a_n.littletanks.gameattrs.Global;
 
 public class Water extends Cell {
@@ -18,6 +19,11 @@ public class Water extends Cell {
 	@Override
 	public boolean getAvailable() {
 		return false;
+	}
+
+	@Override
+	public Symbol drawSymbol() {
+		return new Symbol("~ ~", "~ ~");
 	}
 
 }

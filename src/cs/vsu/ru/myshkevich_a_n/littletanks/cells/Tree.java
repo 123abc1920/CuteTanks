@@ -1,5 +1,6 @@
 package cs.vsu.ru.myshkevich_a_n.littletanks.cells;
 
+import cs.vsu.ru.myshkevich_a_n.littletanks.Symbol;
 import cs.vsu.ru.myshkevich_a_n.littletanks.gameattrs.Global;
 
 public class Tree extends Cell {
@@ -21,6 +22,11 @@ public class Tree extends Cell {
 	@Override
 	public boolean setDestroy(boolean getFromEnemy) {
 		return true;
+	}
+
+	@Override
+	public Symbol drawSymbol() {
+		return new Symbol("@ @", "@ @");
 	}
 
 }
