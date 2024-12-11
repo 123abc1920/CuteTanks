@@ -1,4 +1,6 @@
-package cs.vsu.ru.myshkevich_a_n.littletanks.tanks;
+package cs.vsu.ru.myshkevich_a_n.littletanks.tanks.enemies;
+
+import cs.vsu.ru.myshkevich_a_n.littletanks.tanks.Target;
 
 public class HealthEnemy extends Enemy {
 

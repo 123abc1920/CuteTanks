@@ -16,10 +16,11 @@ import cs.vsu.ru.myshkevich_a_n.littletanks.cells.Empty;
 import cs.vsu.ru.myshkevich_a_n.littletanks.cells.Flag;
 import cs.vsu.ru.myshkevich_a_n.littletanks.cells.Spawner;
 import cs.vsu.ru.myshkevich_a_n.littletanks.cores.Core;
-import cs.vsu.ru.myshkevich_a_n.littletanks.tanks.Enemy;
 import cs.vsu.ru.myshkevich_a_n.littletanks.tanks.Player;
 import cs.vsu.ru.myshkevich_a_n.littletanks.tanks.Tank;
 import cs.vsu.ru.myshkevich_a_n.littletanks.tanks.Target;
+import cs.vsu.ru.myshkevich_a_n.littletanks.tanks.enemies.Enemy;
+import cs.vsu.ru.myshkevich_a_n.littletanks.tanks.enemies.EnemyFabric;
 
 public class World {
 	private List<Enemy> enemies = new ArrayList<>();
@@ -37,7 +38,7 @@ public class World {
 
 	public World(Level lvl) {
 		players.add(new Player(Global.size - 1, (Global.size - 1) / 2, Target.TOP));
-		enemies.add(new Enemy(0, (Global.size - 1) / 2, Target.BOTTOM));
+		enemies.add(EnemyFabric.createEnemy(0, (Global.size - 1) / 2));
 
 		int index = 0;
 		for (int i = 0; i < Global.size; i++) {

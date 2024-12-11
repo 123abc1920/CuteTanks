@@ -1,6 +1,8 @@
-package cs.vsu.ru.myshkevich_a_n.littletanks.tanks;
+package cs.vsu.ru.myshkevich_a_n.littletanks.tanks.enemies;
 
 import cs.vsu.ru.myshkevich_a_n.littletanks.gameattrs.Global;
+import cs.vsu.ru.myshkevich_a_n.littletanks.tanks.Tank;
+import cs.vsu.ru.myshkevich_a_n.littletanks.tanks.Target;
 
 public class Enemy extends Tank {
     public Enemy(int row, int col, Target target) {
@@ -17,7 +19,7 @@ public class Enemy extends Tank {
         this.setSymbolRight(Global.getRightEnemySymbol());
     }
 
-    @Override
+	@Override
     public boolean isEnemy() {
         return true;
     }
