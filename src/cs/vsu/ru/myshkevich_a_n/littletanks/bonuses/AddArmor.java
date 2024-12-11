@@ -2,6 +2,7 @@ package cs.vsu.ru.myshkevich_a_n.littletanks.bonuses;
 
 import java.util.Random;
 
+import cs.vsu.ru.myshkevich_a_n.littletanks.Symbol;
 import cs.vsu.ru.myshkevich_a_n.littletanks.gameattrs.Global;
 import cs.vsu.ru.myshkevich_a_n.littletanks.tanks.Tank;
 
@@ -20,6 +21,12 @@ public class AddArmor extends Bonus {
 	@Override
 	public void setEffect(Tank tank) {
 		tank.addArmor(this.armorPoints);
+	}
+
+	@Override
+	public Symbol drawSymbol() {
+		String s = String.valueOf(Global.armorSymbol).repeat(armorPoints);
+		return new Symbol(s);
 	}
 
 }

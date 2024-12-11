@@ -6,26 +6,25 @@ import cs.vsu.ru.myshkevich_a_n.littletanks.Symbol;
 import cs.vsu.ru.myshkevich_a_n.littletanks.gameattrs.Global;
 import cs.vsu.ru.myshkevich_a_n.littletanks.tanks.Tank;
 
-public class AddLifeBonus extends Bonus {
+public class VelocityBonus extends Bonus {
+	private int velocity;
 	private Random r = new Random();
-	private int lifePoints;
 
-	public AddLifeBonus(int row, int col) {
+	public VelocityBonus(int row, int col) {
 		this.setRow(row);
 		this.setCol(col);
-		this.setSymbol(Global.lifeSymbol);
 
-		this.lifePoints = r.nextInt(3) + 1;
+		this.velocity = r.nextInt(3) + 1;
 	}
 
 	@Override
 	public void setEffect(Tank tank) {
-		tank.setLife(lifePoints);
+		tank.setCoreVelocity(this.velocity);
 	}
 
 	@Override
 	public Symbol drawSymbol() {
-		String s = String.valueOf(Global.lifeSymbol).repeat(this.lifePoints);
+		String s = String.valueOf(Global.velocitySymbol).repeat(velocity);
 		return new Symbol(s);
 	}
 

@@ -52,8 +52,9 @@ public class World {
 					cells.add(newCell);
 				} else {
 					board[i][j] = -1;
-					if (c == Global.activeBombSymbol || c == Global.armorSymbol || c == Global.lifeSymbol) {
-						bonuses.add(BonusFabric.createBonus(c, i, j));
+					Bonus b = BonusFabric.createBonus(c, i, j);
+					if (b != null) {
+						bonuses.add(b);
 					}
 				}
 			}

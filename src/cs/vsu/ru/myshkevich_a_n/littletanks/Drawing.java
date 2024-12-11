@@ -8,11 +8,11 @@ public class Drawing {
 	public static void draw(Game game) {
 		for (int i = 0; i < Global.size; i++) {
 			for (int j = 0; j < Global.size; j++) {
-				System.out.print(game.getWorld().drawCell(i, j).up + " ");
+				System.out.print(game.getWorld().drawCell(i, j).up);
 			}
 			System.out.println();
 			for (int j = 0; j < Global.size; j++) {
-				System.out.print(game.getWorld().drawCell(i, j).down + " ");
+				System.out.print(game.getWorld().drawCell(i, j).down);
 			}
 			System.out.println();
 		}

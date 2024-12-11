@@ -80,6 +80,9 @@ public class Core {
 	}
 
 	public Symbol drawSymbol() {
-		return new Symbol("O O", "O O");
+		if (this.fromEnemy) {
+			return new Symbol("XXXX");
+		}
+		return new Symbol("OOOO");
 	}
 }

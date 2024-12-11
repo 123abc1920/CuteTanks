@@ -7,7 +7,7 @@ public class Wall extends Cell {
 	public Wall() {
 		this.setSymbol(Global.wallSymbol);
 		this.setAvailable(false);
-		this.setLifes(3);
+		this.setLifes(4);
 	}
 
 	public Wall(int row, int col) {
@@ -15,7 +15,7 @@ public class Wall extends Cell {
 		this.setRow(row);
 		this.setSymbol(Global.wallSymbol);
 		this.setAvailable(false);
-		this.setLifes(3);
+		this.setLifes(4);
 	}
 
 	@Override
@@ -46,7 +46,8 @@ public class Wall extends Cell {
 
 	@Override
 	public Symbol drawSymbol() {
-		return new Symbol("# #", "# #");
+		String s = String.valueOf(Global.wallSymbol).repeat(getLifes());
+		return new Symbol(s);
 	}
 
 }

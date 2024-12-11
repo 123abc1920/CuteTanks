@@ -42,6 +42,18 @@ public class Enemy extends Tank {
 
 	@Override
 	public Symbol drawSymbol() {
-		return new Symbol("v v", "+ +");
+		if (this.target == Target.TOP) {
+			return new Symbol("^^++");
+		}
+		if (this.target == Target.BOTTOM) {
+			return new Symbol("++vv");
+		}
+		if (this.target == Target.RIGHT) {
+			return new Symbol("+>+>");
+		}
+		if (this.target == Target.LEFT) {
+			return new Symbol("<+<+");
+		}
+		return new Symbol("    ");
 	}
 }

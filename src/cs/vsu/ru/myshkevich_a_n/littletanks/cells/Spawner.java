@@ -28,7 +28,7 @@ public class Spawner extends Cell {
 
 	@Override
 	public Symbol drawSymbol() {
-		return new Symbol("I I", "I I");
+		return new Symbol("IIII");
 	}
 
 }

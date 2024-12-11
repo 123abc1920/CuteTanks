@@ -33,7 +33,5 @@ public abstract class Bonus {
 
 	public abstract void setEffect(Tank tank);
 
-	public Symbol drawSymbol() {
-		return new Symbol("D D", "D D");
-	}
+	public abstract Symbol drawSymbol();
 }

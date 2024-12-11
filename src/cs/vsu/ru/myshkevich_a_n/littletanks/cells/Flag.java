@@ -28,7 +28,7 @@ public class Flag extends Cell {
 
 	@Override
 	public Symbol drawSymbol() {
-		return new Symbol("$ $", "$ $");
+		return new Symbol("$$$$");
 	}
 
 }

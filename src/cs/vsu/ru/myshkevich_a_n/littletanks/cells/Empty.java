@@ -26,6 +26,6 @@ public class Empty extends Cell {
 
 	@Override
 	public Symbol drawSymbol() {
-		return new Symbol(". .", ". .");
+		return new Symbol("....");
 	}
 }

@@ -16,6 +16,7 @@ public class Global {
     public static final char activeBombSymbol = 'Q';
     public static final char armorSymbol = 'D';
     public static final char lifeSymbol = 'L';
+    public static final char velocitySymbol = 'V';
 
     public static int size = 13;
 

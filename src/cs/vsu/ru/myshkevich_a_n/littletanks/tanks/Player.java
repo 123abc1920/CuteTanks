@@ -40,6 +40,18 @@ public class Player extends Tank {
 
 	@Override
 	public Symbol drawSymbol() {
-		return new Symbol("n n", "+ +");
+		if (this.target == Target.TOP) {
+			return new Symbol("nn++");
+		}
+		if (this.target == Target.BOTTOM) {
+			return new Symbol("++uu");
+		}
+		if (this.target == Target.RIGHT) {
+			return new Symbol("+)+)");
+		}
+		if (this.target == Target.LEFT) {
+			return new Symbol("(+(+");
+		}
+		return new Symbol("    ");
 	}
 }

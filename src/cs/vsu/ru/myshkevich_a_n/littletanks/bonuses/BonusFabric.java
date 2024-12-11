@@ -12,6 +12,8 @@ public class BonusFabric {
 			return new AddArmor(i, j);
 		case Global.lifeSymbol:
 			return new AddLifeBonus(i, j);
+		case Global.velocitySymbol:
+			return new VelocityBonus(i, j);
 		default:
 			return null;
 		}
