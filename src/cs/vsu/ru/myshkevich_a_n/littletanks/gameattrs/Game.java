@@ -1,86 +1,91 @@
 package cs.vsu.ru.myshkevich_a_n.littletanks.gameattrs;
 
-import java.util.Scanner;
-
 import cs.vsu.ru.myshkevich_a_n.littletanks.Drawing;
 
 public class Game {
-    private World world;
-    private Level lvl;
-    private int score = 0;
-    private int steps = 0;
-    private Scanner s = new Scanner(System.in);
+	private World world;
+	private Level lvl;
+	private int score = 0;
+	private int steps = 0;
 
-    public Game() {
-        createNewGame(0);
-    }
+	public Game(int score, int lvl) {
+		createNewGame(score, lvl);
+	}
 
-    private void createNewGame(int score) {
-        String str = s.nextLine();
-        while (!"12345".contains(str)) {
-            str = s.nextLine();
-        }
-        this.lvl = new Level(str);
-        this.world = new World(lvl);
-        this.score = score;
-        this.steps = 0;
-    }
+	private void createNewGame(int score, int lvl) {
+		this.lvl = new Level(String.valueOf(lvl));
+		this.world = new World(this.lvl);
+		this.score = score;
+		this.steps = 0;
+	}
 
-    public World getWorld() {
-        return world;
-    }
+	public World getWorld() {
+		return world;
+	}
 
-    public void setWorld(World world) {
-        this.world = world;
-    }
+	public void setWorld(World world) {
+		this.world = world;
+	}
 
-    public int getScore() {
-        return score;
-    }
+	public int getScore() {
+		return score;
+	}
 
-    public void setScore(int score) {
-        this.score = score;
-    }
+	public void setScore(int score) {
+		this.score = score;
+	}
 
-    public String getLifes() {
-        return world.getLifes();
-    }
+	public String getLifes() {
+		return world.getLifes();
+	}
 
-    public String getArmours() {
-        return world.getArmours();
-    }
+	public String getArmours() {
+		return world.getArmours();
+	}
 
-    public String getVelocities() {
-        return world.getVelocities();
-    }
+	public String getVelocities() {
+		return world.getVelocities();
+	}
 
-    public void gameStep() {
-        Drawing.printInfo(this);
-        Drawing.draw(this);
+	public int getLvl() {
+		return lvl.getLevel();
+	}
 
-        if ((this.steps + 1) % 5 == 0) {
-            world.spawnEnemy(true);
-            this.steps = 0;
-        }
+	private void printTable(Game game, boolean isWin) {
+		Drawing.printInfo(game);
+		Drawing.draw(game);
+		Drawing.printWin(isWin);
+	}
 
-        GameStatus status = world.gameStep();
+	public GameStatus gameStep() {
+		Drawing.printInfo(this);
+		Drawing.draw(this);
 
-        if (status == GameStatus.LOSE) {
-            Drawing.printInfo(this);
-            Drawing.draw(this);
-            Drawing.printWin(false);
-            this.createNewGame(0);
-        }
+		if ((this.steps + 1) % 5 == 0) {
+			world.spawnEnemy(true);
+			this.steps = 0;
+		}
 
-        if (status == GameStatus.WIN) {
-            this.score += 50;
-            Drawing.printInfo(this);
-            Drawing.draw(this);
-            Drawing.printWin(true);
-            this.createNewGame(this.score);
-        }
+		if (world.playersMove()) {
+			return GameStatus.STOP;
+		}
+		world.enemiesMove();
+		world.coresMove();
+		this.score += world.deleteStep();
+		GameStatus status = world.checkGameStatus();
 
-        this.steps++;
-        this.gameStep();
-    }
+		if (status == GameStatus.LOSE) {
+			printTable(this, false);
+			return status;
+		}
+
+		if (status == GameStatus.WIN) {
+			this.score += 50;
+			printTable(this, true);
+			return status;
+		}
+
+		this.steps++;
+		return GameStatus.NOTHING;
+	}
 }

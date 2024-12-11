@@ -117,15 +117,81 @@ public class World {
 	public void addCore(Tank tank) {
 		Core core = new Core(tank.getRow(), tank.getCol(), tank.getTarget(), tank.isEnemy(), tank.getCoreVelocity());
 		if (core.getRow() >= 0 && core.getRow() <= Global.size - 1 && core.getCol() >= 0
-				&& core.getCol() <= Global.size - 1) {
+				&& core.getCol() <= Global.size - 1 && getCore(core.getRow(), core.getCol()) == null) {
 			cores.add(core);
 		}
 	}
 
-	public GameStatus gameStep() {
-		playersMove();
-		enemiesMove();
-		coresMove();
+	public boolean playersMove() {
+		char d = '0';
+
+		for (Tank p : players) {
+			while (!Global.TARGETS.contains(d) && d != 'q') {
+				String string = s.nextLine();
+				if (!string.isEmpty()) {
+					d = string.charAt(0);
+				}
+			}
+			if (d == 'q') {
+				return true;
+			}
+			move(d, p);
+		}
+
+		return false;
+	}
+
+	public void enemiesMove() {
+		char d;
+
+		Random rnd = new Random();
+		for (Tank e : enemies) {
+			d = Global.TARGETS.get(rnd.nextInt(Global.TARGETS.size()));
+			move(d, e);
+		}
+	}
+
+	public void coresMove() {
+		for (Core c : cores) {
+			for (int i = 0; i < c.getVelocity(); i++) {
+				int newRow = c.getRow() + c.getTarget().changeRowsCols()[0];
+				int newCol = c.getCol() + c.getTarget().changeRowsCols()[1];
+				if (newRow < 0 || newRow >= Global.size || newCol < 0 || newCol >= Global.size) {
+					c.setNotAvailable();
+				}
+				if (c.getAvailable()) {
+					c.setRow(newRow);
+					c.setCol(newCol);
+					if (getCells(board[c.getRow()][c.getCol()]).setDestroy(c.getFromEnemy())) {
+						c.setNotAvailable();
+					} else {
+						Tank t = getTank(c.getRow(), c.getCol());
+						if (t != null) {
+							t.setDestroy(c.getFromEnemy());
+						} else {
+							Core c2 = getCore(c.getRow(), c.getCol());
+							if (c2 != null) {
+								if (c2.getFromEnemy() != c.getFromEnemy()) {
+									c2.setNotAvailable();
+									c.setNotAvailable();
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	public Cell getCells(int index) {
+		if (index != -1) {
+			return this.cells.get(index);
+		}
+		return new Empty();
+	}
+
+	public int deleteStep() {
+		int result = 0;
 
 		Iterator<Player> iteratorP = players.iterator();
 		while (iteratorP.hasNext()) {
@@ -140,6 +206,7 @@ public class World {
 			Enemy p = (Enemy) iteratorE.next();
 			if (p.getKilled()) {
 				iteratorE.remove();
+				result++;
 			}
 		}
 
@@ -151,79 +218,7 @@ public class World {
 			}
 		}
 
-		if (players.size() == 0 || flag.getLifes() == 0) {
-			return GameStatus.LOSE;
-		}
-
-		if (spawner.getLifes() == 0) {
-			return GameStatus.WIN;
-		}
-
-		return GameStatus.NOTHING;
-	}
-
-	private void playersMove() {
-		char d = '0';
-
-		for (Tank p : players) {
-			while (!Global.TARGETS.contains(d) && d != 'q') {
-				String string = s.nextLine();
-				if (!string.isEmpty()) {
-					d = string.charAt(0);
-				}
-			}
-			if (d == 'q') {
-				System.exit(0);
-			}
-			move(d, p);
-		}
-	}
-
-	private void enemiesMove() {
-		char d;
-
-		Random rnd = new Random();
-		for (Tank e : enemies) {
-			d = Global.TARGETS.get(rnd.nextInt(Global.TARGETS.size()));
-			move(d, e);
-		}
-	}
-
-	private void coresMove() {
-		for (Core c : cores) {
-			int newRow = c.getRow() + c.getTarget().changeRowsCols()[0] * c.getVelocity();
-			int newCol = c.getCol() + c.getTarget().changeRowsCols()[1] * c.getVelocity();
-			if (newRow < 0 || newRow >= Global.size || newCol < 0 || newCol >= Global.size) {
-				c.setNotAvailable();
-			}
-			if (c.getAvailable()) {
-				c.setRow(newRow);
-				c.setCol(newCol);
-				if (getCells(board[c.getRow()][c.getCol()]).setDestroy(c.getFromEnemy())) {
-					c.setNotAvailable();
-				} else {
-					Tank t = getTank(c.getRow(), c.getCol());
-					if (t != null) {
-						t.setDestroy(c.getFromEnemy());
-					} else {
-						Core c2 = getCore(c.getRow(), c.getCol());
-						if (c2 != null) {
-							if (c2.getFromEnemy() != c.getFromEnemy()) {
-								c2.setNotAvailable();
-								c.setNotAvailable();
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-
-	public Cell getCells(int index) {
-		if (index != -1) {
-			return this.cells.get(index);
-		}
-		return new Empty();
+		return result;
 	}
 
 	private void move(char c, Tank tank) {
@@ -291,6 +286,18 @@ public class World {
 			velicities[players.indexOf(p)] = p.getCoreVelocity();
 		}
 		return Arrays.toString(velicities).replace("[", "").replace("]", "");
+	}
+
+	public GameStatus checkGameStatus() {
+		if (players.size() == 0 || flag.getLifes() == 0) {
+			return GameStatus.LOSE;
+		}
+
+		if (spawner.getLifes() == 0) {
+			return GameStatus.WIN;
+		}
+
+		return GameStatus.NOTHING;
 	}
 
 }

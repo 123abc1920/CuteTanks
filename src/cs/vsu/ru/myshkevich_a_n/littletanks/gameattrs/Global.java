@@ -10,6 +10,8 @@ public class Global {
     public static final char flagSymbol = '$';
     public static final char spawnerSymbol = 'I';
     public static final char emptySymbol = '.';
+    public static final char strongWallSymbol = '=';
+    
     public static final char corePlayerSymbol = 'O';
     public static final char coreEnemySymbol = 'X';
     

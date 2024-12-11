@@ -20,8 +20,8 @@ public class Drawing {
 	}
 
 	public static void printInfo(Game game) {
-		System.out.printf("Score: %d Lifes: %s Armours: %s Velocities: %s%n", game.getScore(), game.getLifes(),
-				game.getArmours(), game.getVelocities());
+		System.out.printf("Level: %d Score: %d Lifes: %s Armors: %s Velocities: %s%n", game.getLvl(), game.getScore(),
+				game.getLifes(), game.getArmours(), game.getVelocities());
 	}
 
 	public static void printWin(boolean isWin) {

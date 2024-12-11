@@ -54,6 +54,6 @@ public class Enemy extends Tank {
 		if (this.target == Target.LEFT) {
 			return new Symbol("<+<+");
 		}
-		return new Symbol("    ");
+		return new Symbol("");
 	}
 }

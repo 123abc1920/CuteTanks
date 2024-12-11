@@ -14,7 +14,10 @@ public class Level {
 	private JsonObject jsonObject;
 	private JsonArray jsonArray;
 
+	private String level;
+
 	public Level(String s) {
+		level = s;
 		try {
 			reader = new JsonReader(new FileReader("src//cs//vsu//ru//myshkevich_a_n//files//" + s + ".json"));
 		} catch (FileNotFoundException e) {
@@ -22,6 +25,10 @@ public class Level {
 		}
 		jsonObject = gson.fromJson(reader, JsonObject.class);
 		jsonArray = jsonObject.getAsJsonArray("lvl");
+	}
+
+	public int getLevel() {
+		return Integer.valueOf(level);
 	}
 
 	public char getCell(int i, int j) {
