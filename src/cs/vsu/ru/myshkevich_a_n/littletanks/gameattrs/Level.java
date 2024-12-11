@@ -25,7 +25,7 @@ public class Level {
 	}
 
 	public char getCell(int i, int j) {
-		return jsonArray.get(i).getAsJsonArray().get(j).getAsCharacter();
+		return jsonArray.get(i).getAsString().charAt(j);
 	}
 
 }
