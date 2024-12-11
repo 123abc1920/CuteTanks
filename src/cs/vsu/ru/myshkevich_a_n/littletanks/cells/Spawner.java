@@ -16,6 +16,11 @@ public class Spawner extends Cell {
 		this.setCol(col);
 		this.setRow(row);
 	}
+	
+	@Override
+	public boolean getAvailable() {
+		return false;
+	}
 
 	@Override
 	public boolean setDestroy(boolean getFromEnemy) {

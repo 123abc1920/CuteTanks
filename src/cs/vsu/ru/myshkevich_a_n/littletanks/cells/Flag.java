@@ -16,6 +16,11 @@ public class Flag extends Cell {
 		this.setSymbol(Global.flagSymbol);
 		this.setLifes(1);
 	}
+	
+	@Override
+	public boolean getAvailable() {
+		return false;
+	}
 
 	@Override
 	public boolean setDestroy(boolean getFromEnemy) {

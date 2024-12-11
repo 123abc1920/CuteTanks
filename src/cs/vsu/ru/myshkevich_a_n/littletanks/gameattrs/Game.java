@@ -1,5 +1,7 @@
 package cs.vsu.ru.myshkevich_a_n.littletanks.gameattrs;
 
+import java.io.File;
+
 import cs.vsu.ru.myshkevich_a_n.littletanks.Drawing;
 
 public class Game {
@@ -13,10 +15,24 @@ public class Game {
 	}
 
 	private void createNewGame(int score, int lvl) {
+		if (lvl <= 0) {
+			lvl = 1;
+		}
+		int count = countFiles();
+
+		if (lvl > count) {
+			lvl = 1;
+		}
+
 		this.lvl = new Level(String.valueOf(lvl));
 		this.world = new World(this.lvl);
 		this.score = score;
 		this.steps = 0;
+	}
+
+	private int countFiles() {
+		File directory = new File("src//cs//vsu//ru//myshkevich_a_n//files//");
+		return directory.list().length;
 	}
 
 	public World getWorld() {
