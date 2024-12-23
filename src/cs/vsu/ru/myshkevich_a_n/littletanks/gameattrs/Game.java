@@ -78,7 +78,7 @@ public class Game {
 		Drawing.draw(this);
 
 		if ((this.steps + 1) % 5 == 0) {
-			world.spawnEnemy(true);
+			world.spawnEnemy();
 			this.steps = 0;
 		}
 

@@ -38,7 +38,15 @@ public class World {
 	private Scanner s = new Scanner(System.in);
 
 	public World(Level lvl) {
-		players.add(new Player(Global.size - 1, (Global.size - 1) / 2, Target.TOP));
+		System.out.println("Add players count: \"1\" = 1, \"2\" = 2");
+		int p = s.nextInt();
+		p = Math.min(2, Math.max(1, p));
+		if (p == 2) {
+			players.add(new Player(Global.size - 1, (Global.size - 1) / 2 - 1, Target.TOP, '1'));
+			players.add(new Player(Global.size - 1, (Global.size - 1) / 2 + 1, Target.TOP, '2'));
+		} else {
+			players.add(new Player(Global.size - 1, (Global.size - 1) / 2, Target.TOP, '+'));
+		}
 		enemies.add(EnemyFabric.createEnemy(0, (Global.size - 1) / 2));
 
 		int index = 0;
@@ -123,9 +131,8 @@ public class World {
 	}
 
 	public boolean playersMove() {
-		char d = '0';
-
 		for (Tank p : players) {
+			char d = '0';
 			while (!Global.TARGETS.contains(d) && d != 'q') {
 				String string = s.nextLine();
 				if (!string.isEmpty()) {
@@ -254,14 +261,9 @@ public class World {
 		return Stream.concat(enemies.stream(), players.stream()).anyMatch(e -> e.getCol() == col && e.getRow() == row);
 	}
 
-	public void spawnEnemy(boolean isEnemy) {
-		if (isEnemy) {
-			Enemy enemy = new Enemy(0, (Global.size - 1) / 2, Target.BOTTOM);
-			this.enemies.add(enemy);
-			return;
-		}
-		Player player = new Player(Global.size - 1, (Global.size - 1) / 2, Target.TOP);
-		this.players.add(player);
+	public void spawnEnemy() {
+		Enemy enemy = EnemyFabric.createEnemy(0, (Global.size - 1) / 2);
+		this.enemies.add(enemy);
 	}
 
 	public String getLifes() {

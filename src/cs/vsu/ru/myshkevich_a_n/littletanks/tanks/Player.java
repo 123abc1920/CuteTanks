@@ -4,13 +4,15 @@ import cs.vsu.ru.myshkevich_a_n.littletanks.Symbol;
 import cs.vsu.ru.myshkevich_a_n.littletanks.gameattrs.Global;
 
 public class Player extends Tank {
+	private char playerNumber;
 
-	public Player(int row, int col, Target target) {
+	public Player(int row, int col, Target target, char num) {
 		this.setCol(col);
 		this.setRow(row);
 		this.setTarget(target);
 		this.setLife(3);
 		this.setCoreVelocity(1);
+		this.playerNumber = num;
 
 		this.setSymbolUp(Global.getUpPlayerSymbol());
 		this.setSymbolDown(Global.getDownPlayerSymbol());
@@ -41,16 +43,16 @@ public class Player extends Tank {
 	@Override
 	public Symbol drawSymbol() {
 		if (this.target == Target.TOP) {
-			return new Symbol("nn++");
+			return new Symbol("nn" + playerNumber + "+");
 		}
 		if (this.target == Target.BOTTOM) {
-			return new Symbol("++uu");
+			return new Symbol("+" + playerNumber + "u");
 		}
 		if (this.target == Target.RIGHT) {
-			return new Symbol("+)+)");
+			return new Symbol("+)" + playerNumber + ")");
 		}
 		if (this.target == Target.LEFT) {
-			return new Symbol("(+(+");
+			return new Symbol("(" + playerNumber + "(+");
 		}
 		return new Symbol("");
 	}
