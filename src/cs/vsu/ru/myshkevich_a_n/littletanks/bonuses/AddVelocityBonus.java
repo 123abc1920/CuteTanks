@@ -3,14 +3,13 @@ package cs.vsu.ru.myshkevich_a_n.littletanks.bonuses;
 import java.util.Random;
 
 import cs.vsu.ru.myshkevich_a_n.littletanks.Symbol;
-import cs.vsu.ru.myshkevich_a_n.littletanks.gameattrs.Global;
 import cs.vsu.ru.myshkevich_a_n.littletanks.tanks.Tank;
 
-public class VelocityBonus extends Bonus {
+public class AddVelocityBonus extends Bonus {
 	private int velocity;
 	private Random r = new Random();
 
-	public VelocityBonus(int row, int col) {
+	public AddVelocityBonus(int row, int col) {
 		this.setRow(row);
 		this.setCol(col);
 
@@ -24,7 +23,7 @@ public class VelocityBonus extends Bonus {
 
 	@Override
 	public Symbol drawSymbol() {
-		String s = String.valueOf(Global.velocitySymbol).repeat(velocity);
+		String s = "\u21D0".repeat(velocity);
 		return new Symbol(s);
 	}
 

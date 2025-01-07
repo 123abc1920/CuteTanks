@@ -1,8 +1,11 @@
 package cs.vsu.ru.myshkevich_a_n.littletanks.gameattrs;
 
 import java.io.File;
+import java.net.URISyntaxException;
+import java.util.Scanner;
 
 import cs.vsu.ru.myshkevich_a_n.littletanks.Drawing;
+import cs.vsu.ru.myshkevich_a_n.littletanks.MainClass;
 
 public class Game {
 	private World world;
@@ -31,9 +34,20 @@ public class Game {
 	}
 
 	private int countFiles() {
-		File directory = new File("lvls//");
-		if (directory.list()==null||directory.list().length == 0) {
-			throw new IllegalArgumentException("Уровни не были добавлены");
+		/*
+		 * File jarFile = null; try { jarFile = new
+		 * File(MainClass.class.getProtectionDomain().getCodeSource().getLocation().
+		 * toURI()); } catch (URISyntaxException e) { e.printStackTrace(); } File
+		 * jarDirectory = jarFile.getParentFile(); File directory = new
+		 * File(jarDirectory + "lvls");
+		 */
+		// для eclipse
+		File directory = new File("lvls\\");
+		if (directory.list() == null || directory.list().length == 0 || !directory.exists()) {
+			System.out.println("Уровни не были добавлены, добавьте в lvls.");
+			System.out.println("Нажмите Enter чтобы прервать...");
+			new Scanner(System.in).nextLine();
+			System.exit(0);
 		}
 		return directory.list().length;
 	}

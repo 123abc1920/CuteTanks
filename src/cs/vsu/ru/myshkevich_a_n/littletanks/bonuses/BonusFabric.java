@@ -13,7 +13,7 @@ public class BonusFabric {
 		case Global.lifeSymbol:
 			return new AddLifeBonus(i, j);
 		case Global.velocitySymbol:
-			return new VelocityBonus(i, j);
+			return new AddVelocityBonus(i, j);
 		default:
 			return null;
 		}

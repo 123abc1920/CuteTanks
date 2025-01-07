@@ -25,7 +25,7 @@ public class AddArmor extends Bonus {
 
 	@Override
 	public Symbol drawSymbol() {
-		String s = String.valueOf(Global.armorSymbol).repeat(armorPoints);
+		String s = "\u2605".repeat(armorPoints);
 		return new Symbol(s);
 	}
 

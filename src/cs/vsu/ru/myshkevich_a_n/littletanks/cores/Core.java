@@ -81,8 +81,8 @@ public class Core {
 
 	public Symbol drawSymbol() {
 		if (this.fromEnemy) {
-			return new Symbol("XXXX");
+			return new Symbol("\u20DD".repeat(4));
 		}
-		return new Symbol("OOOO");
+		return new Symbol("\u004F".repeat(4));
 	}
 }

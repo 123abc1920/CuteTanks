@@ -26,7 +26,8 @@ public class Tree extends Cell {
 
 	@Override
 	public Symbol drawSymbol() {
-		return new Symbol("@@@@");
+		String s = "\u2766";
+		return new Symbol(s.repeat(4));
 	}
 
 }

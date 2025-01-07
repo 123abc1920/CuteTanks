@@ -46,8 +46,8 @@ public class Wall extends Cell {
 
 	@Override
 	public Symbol drawSymbol() {
-		String s = String.valueOf(Global.wallSymbol).repeat(getLifes());
-		return new Symbol(s);
+		String s = "#";
+		return new Symbol(s.repeat(getLifes()));
 	}
 
 }

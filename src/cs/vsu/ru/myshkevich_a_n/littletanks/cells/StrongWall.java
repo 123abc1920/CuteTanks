@@ -24,7 +24,7 @@ public class StrongWall extends Cell {
 
 	@Override
 	public Symbol drawSymbol() {
-		return new Symbol(String.valueOf(Global.strongWallSymbol).repeat(4));
+		return new Symbol("\u2554\u2557\u255A\u255D");
 	}
 
 }

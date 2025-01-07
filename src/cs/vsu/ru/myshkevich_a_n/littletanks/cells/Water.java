@@ -23,7 +23,8 @@ public class Water extends Cell {
 
 	@Override
 	public Symbol drawSymbol() {
-		return new Symbol("~~~~");
+		String s = "\u2248";
+		return new Symbol(s.repeat(4));
 	}
 
 }

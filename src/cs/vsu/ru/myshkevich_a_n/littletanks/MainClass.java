@@ -2,6 +2,7 @@ package cs.vsu.ru.myshkevich_a_n.littletanks;
 
 import cs.vsu.ru.myshkevich_a_n.littletanks.gameattrs.Game;
 import cs.vsu.ru.myshkevich_a_n.littletanks.gameattrs.GameStatus;
+import cs.vsu.ru.myshkevich_a_n.littletanks.gameattrs.Global;
 
 public class MainClass {
 	public static void main(String[] args) {

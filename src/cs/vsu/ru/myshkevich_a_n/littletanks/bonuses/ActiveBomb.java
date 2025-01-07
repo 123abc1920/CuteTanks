@@ -25,7 +25,7 @@ public class ActiveBomb extends Bonus {
 
 	@Override
 	public Symbol drawSymbol() {
-		String s = String.valueOf(Global.activeBombSymbol).repeat(bombPoints);
+		String s = "\u1F79".repeat(bombPoints);
 		return new Symbol(s);
 	}
 

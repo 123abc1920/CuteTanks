@@ -16,7 +16,7 @@ public class Flag extends Cell {
 		this.setSymbol(Global.flagSymbol);
 		this.setLifes(1);
 	}
-	
+
 	@Override
 	public boolean getAvailable() {
 		return false;
@@ -33,7 +33,7 @@ public class Flag extends Cell {
 
 	@Override
 	public Symbol drawSymbol() {
-		return new Symbol("$$$$");
+		return new Symbol("\u2691".repeat(4));
 	}
 
 }

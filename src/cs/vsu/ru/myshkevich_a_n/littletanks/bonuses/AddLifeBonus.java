@@ -25,7 +25,7 @@ public class AddLifeBonus extends Bonus {
 
 	@Override
 	public Symbol drawSymbol() {
-		String s = String.valueOf(Global.lifeSymbol).repeat(this.lifePoints);
+		String s = "\u2765".repeat(this.lifePoints);
 		return new Symbol(s);
 	}
 
