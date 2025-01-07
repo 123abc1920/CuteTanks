@@ -31,7 +31,10 @@ public class Game {
 	}
 
 	private int countFiles() {
-		File directory = new File("src//cs//vsu//ru//myshkevich_a_n//files//");
+		File directory = new File("lvls//");
+		if (directory.list()==null||directory.list().length == 0) {
+			throw new IllegalArgumentException("Уровни не были добавлены");
+		}
 		return directory.list().length;
 	}
 

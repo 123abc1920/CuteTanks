@@ -19,7 +19,7 @@ public class Level {
 	public Level(String s) {
 		level = s;
 		try {
-			reader = new JsonReader(new FileReader("src//cs//vsu//ru//myshkevich_a_n//files//" + s + ".json"));
+			reader = new JsonReader(new FileReader("lvls//" + s + ".json"));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
