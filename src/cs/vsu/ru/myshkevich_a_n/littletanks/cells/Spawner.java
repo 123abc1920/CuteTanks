@@ -33,7 +33,7 @@ public class Spawner extends Cell {
 
 	@Override
 	public Symbol drawSymbol() {
-		return new Symbol("IIII");
+		return new Symbol("\u2691".repeat(4));
 	}
 
 }

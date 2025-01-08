@@ -33,7 +33,7 @@ public class Flag extends Cell {
 
 	@Override
 	public Symbol drawSymbol() {
-		return new Symbol("\u2691".repeat(4));
+		return new Symbol("\u2690".repeat(4));
 	}
 
 }

@@ -45,7 +45,7 @@ public class World {
 			players.add(new Player(Global.size - 1, (Global.size - 1) / 2 - 1, Target.TOP, '1'));
 			players.add(new Player(Global.size - 1, (Global.size - 1) / 2 + 1, Target.TOP, '2'));
 		} else {
-			players.add(new Player(Global.size - 1, (Global.size - 1) / 2, Target.TOP, '+'));
+			players.add(new Player(Global.size - 1, (Global.size - 1) / 2, Target.TOP, '\u2295'));
 		}
 		enemies.add(EnemyFabric.createEnemy(0, (Global.size - 1) / 2));
 

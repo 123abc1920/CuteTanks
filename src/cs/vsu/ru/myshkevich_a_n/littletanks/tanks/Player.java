@@ -43,16 +43,16 @@ public class Player extends Tank {
 	@Override
 	public Symbol drawSymbol() {
 		if (this.target == Target.TOP) {
-			return new Symbol("nn" + playerNumber + "+");
+			return new Symbol("nn" + playerNumber + "\u2295");
 		}
 		if (this.target == Target.BOTTOM) {
-			return new Symbol("+" + playerNumber + "u");
+			return new Symbol("\u2295" + playerNumber + "u");
 		}
 		if (this.target == Target.RIGHT) {
-			return new Symbol("+)" + playerNumber + ")");
+			return new Symbol("\u2295)" + playerNumber + ")");
 		}
 		if (this.target == Target.LEFT) {
-			return new Symbol("(" + playerNumber + "(+");
+			return new Symbol("(" + playerNumber + "(\u2295");
 		}
 		return new Symbol("");
 	}

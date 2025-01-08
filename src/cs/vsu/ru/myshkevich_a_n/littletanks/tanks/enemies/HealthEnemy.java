@@ -17,16 +17,16 @@ public class HealthEnemy extends Enemy {
 	public Symbol drawSymbol() {
 		String s = "";
 		if (this.target == Target.TOP) {
-			s = "^^ss";
+			s = "^^\u229D\u229D";
 		}
 		if (this.target == Target.BOTTOM) {
-			s = "ssvv";
+			s = "\u229D\u229Dvv";
 		}
 		if (this.target == Target.RIGHT) {
-			s = "s>s>";
+			s = "\u229D>\u229D>";
 		}
 		if (this.target == Target.LEFT) {
-			s = "<s<s";
+			s = "<\u229D<\u229D";
 		}
 		return new Symbol(s);
 	}
