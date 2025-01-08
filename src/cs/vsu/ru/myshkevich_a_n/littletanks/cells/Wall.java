@@ -6,7 +6,15 @@ import cs.vsu.ru.myshkevich_a_n.littletanks.gameattrs.Global;
 import cs.vsu.ru.myshkevich_a_n.littletanks.tanks.Target;
 
 public class Wall extends Cell {
-	private String map = "####";
+
+	private class WallMap {
+		String up = "#";
+		String down = "#";
+		String right = "#";
+		String left = "#";
+	}
+
+	private WallMap map = new WallMap();
 
 	public Wall() {
 		this.setSymbol(Global.wallSymbol);
@@ -34,10 +42,59 @@ public class Wall extends Cell {
 	@Override
 	public boolean setDestroy(Core core) {
 		if (this.getLifes() <= 0) {
-			this.map = "";
 			return false;
 		}
 		Target target = core.getTarget().getOpposite();
+
+		for (int i = 0; i < core.getStrong(); i++) {
+			switch (target) {
+			case TOP:
+				if (this.map.up.equals("#")) {
+					this.map.up = ".";
+				} else if (this.map.left.equals("#")) {
+					this.map.left = ".";
+				} else if (this.map.down.equals("#")) {
+					this.map.down = ".";
+				} else if (this.map.right.equals("#")) {
+					this.map.right = ".";
+				}
+				break;
+			case BOTTOM:
+				if (this.map.down.equals("#")) {
+					this.map.down = ".";
+				} else if (this.map.right.equals("#")) {
+					this.map.right = ".";
+				} else if (this.map.left.equals("#")) {
+					this.map.left = ".";
+				} else if (this.map.up.equals("#")) {
+					this.map.up = ".";
+				}
+				break;
+			case LEFT:
+				if (this.map.left.equals("#")) {
+					this.map.left = ".";
+				} else if (this.map.down.equals("#")) {
+					this.map.down = ".";
+				} else if (this.map.up.equals("#")) {
+					this.map.up = ".";
+				} else if (this.map.right.equals("#")) {
+					this.map.right = ".";
+				}
+				break;
+			case RIGHT:
+				if (this.map.up.equals("#")) {
+					this.map.up = ".";
+				} else if (this.map.right.equals("#")) {
+					this.map.right = ".";
+				} else if (this.map.left.equals("#")) {
+					this.map.left = ".";
+				} else if (this.map.down.equals("#")) {
+					this.map.down = ".";
+				}
+				break;
+			}
+		}
+
 		this.setLifes(this.getLifes() - core.getStrong());
 		return true;
 	}
@@ -52,7 +109,8 @@ public class Wall extends Cell {
 
 	@Override
 	public Symbol drawSymbol() {
-		return new Symbol("#".repeat(getLifes()));
+		String s = this.map.left + this.map.up + this.map.down + this.map.right;
+		return new Symbol(s);
 	}
 
 }

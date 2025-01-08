@@ -47,7 +47,7 @@ public class Player extends Tank {
 			return new Symbol("nn" + playerNumber + "\u2295");
 		}
 		if (this.target == Target.BOTTOM) {
-			return new Symbol("\u2295" + playerNumber + "u");
+			return new Symbol("\u2295" + playerNumber + "uu");
 		}
 		if (this.target == Target.RIGHT) {
 			return new Symbol("\u2295)" + playerNumber + ")");
