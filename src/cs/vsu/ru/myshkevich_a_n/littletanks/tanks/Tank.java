@@ -1,6 +1,7 @@
 package cs.vsu.ru.myshkevich_a_n.littletanks.tanks;
 
 import cs.vsu.ru.myshkevich_a_n.littletanks.Symbol;
+import cs.vsu.ru.myshkevich_a_n.littletanks.cores.Core;
 import cs.vsu.ru.myshkevich_a_n.littletanks.gameattrs.Global;
 
 public abstract class Tank {
@@ -12,7 +13,8 @@ public abstract class Tank {
 	private int row, col;
 	private int lifes = 1;
 
-	private int coreVelocity;
+	private int coreVelocity = 1;
+	private int coreStrong = 1;
 
 	protected Target target;
 
@@ -110,7 +112,7 @@ public abstract class Tank {
 		return isKilled;
 	}
 
-	public boolean setDestroy(boolean getFromEnemy) {
+	public boolean setDestroy(Core core) {
 		return false;
 	}
 
@@ -132,6 +134,14 @@ public abstract class Tank {
 
 	public void setCoreVelocity(int coreVelocity) {
 		this.coreVelocity = coreVelocity;
+	}
+
+	public int getCoreStrong() {
+		return coreStrong;
+	}
+
+	public void setCoreStrong(int coreStrong) {
+		this.coreStrong = coreStrong;
 	}
 
 	public abstract boolean isEnemy();

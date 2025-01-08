@@ -1,6 +1,7 @@
 package cs.vsu.ru.myshkevich_a_n.littletanks.cells;
 
 import cs.vsu.ru.myshkevich_a_n.littletanks.Symbol;
+import cs.vsu.ru.myshkevich_a_n.littletanks.cores.Core;
 
 public abstract class Cell {
 	private int row, col;
@@ -53,7 +54,7 @@ public abstract class Cell {
 		this.lifes = lifes;
 	}
 
-	public boolean setDestroy(boolean getFromEnemy) {
+	public boolean setDestroy(Core core) {
 		return false;
 	}
 	

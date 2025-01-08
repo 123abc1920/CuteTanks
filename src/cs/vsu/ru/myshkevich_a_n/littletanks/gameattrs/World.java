@@ -39,8 +39,18 @@ public class World {
 
 	public World(Level lvl) {
 		System.out.println("Add players count: \"1\" = 1, \"2\" = 2");
-		int p = s.nextInt();
-		p = Math.min(2, Math.max(1, p));
+		int p = -1;
+		while (p != 1 || p != 2) {
+			String str = s.next();
+			try {
+				p = Integer.parseInt(str);
+				if (p == 1 || p == 2) {
+					break;
+				}
+			} catch (Exception e) {
+				p = -1;
+			}
+		}
 		if (p == 2) {
 			players.add(new Player(Global.size - 1, (Global.size - 1) / 2 - 1, Target.TOP, '1'));
 			players.add(new Player(Global.size - 1, (Global.size - 1) / 2 + 1, Target.TOP, '2'));
@@ -169,12 +179,12 @@ public class World {
 				if (c.getAvailable()) {
 					c.setRow(newRow);
 					c.setCol(newCol);
-					if (getCells(board[c.getRow()][c.getCol()]).setDestroy(c.getFromEnemy())) {
+					if (getCells(board[c.getRow()][c.getCol()]).setDestroy(c)) {
 						c.setNotAvailable();
 					} else {
 						Tank t = getTank(c.getRow(), c.getCol());
 						if (t != null) {
-							t.setDestroy(c.getFromEnemy());
+							t.setDestroy(c);
 						} else {
 							Core c2 = getCore(c.getRow(), c.getCol());
 							if (c2 != null) {

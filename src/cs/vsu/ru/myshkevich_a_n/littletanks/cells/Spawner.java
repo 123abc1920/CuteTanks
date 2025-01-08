@@ -1,6 +1,7 @@
 package cs.vsu.ru.myshkevich_a_n.littletanks.cells;
 
 import cs.vsu.ru.myshkevich_a_n.littletanks.Symbol;
+import cs.vsu.ru.myshkevich_a_n.littletanks.cores.Core;
 import cs.vsu.ru.myshkevich_a_n.littletanks.gameattrs.Global;
 
 public class Spawner extends Cell {
@@ -16,16 +17,16 @@ public class Spawner extends Cell {
 		this.setCol(col);
 		this.setRow(row);
 	}
-	
+
 	@Override
 	public boolean getAvailable() {
 		return false;
 	}
 
 	@Override
-	public boolean setDestroy(boolean getFromEnemy) {
-		if (!getFromEnemy) {
-			this.setLifes(this.getLifes() - 1);
+	public boolean setDestroy(Core core) {
+		if (!core.getFromEnemy()) {
+			this.setLifes(this.getLifes() - core.getStrong());
 			return true;
 		}
 		return false;

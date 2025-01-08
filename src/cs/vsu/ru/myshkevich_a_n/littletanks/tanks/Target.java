@@ -6,11 +6,21 @@ public enum Target {
 		public int[] changeRowsCols() {
 			return new int[] { 0, -1 };
 		}
+
+		@Override
+		public Target getOpposite() {
+			return Target.RIGHT;
+		}
 	},
 	RIGHT {
 		@Override
 		public int[] changeRowsCols() {
 			return new int[] { 0, 1 };
+		}
+
+		@Override
+		public Target getOpposite() {
+			return Target.LEFT;
 		}
 	},
 	TOP {
@@ -18,13 +28,25 @@ public enum Target {
 		public int[] changeRowsCols() {
 			return new int[] { -1, 0 };
 		}
+
+		@Override
+		public Target getOpposite() {
+			return Target.BOTTOM;
+		}
 	},
 	BOTTOM {
 		@Override
 		public int[] changeRowsCols() {
 			return new int[] { 1, 0 };
 		}
+
+		@Override
+		public Target getOpposite() {
+			return Target.TOP;
+		}
 	};
 
 	public abstract int[] changeRowsCols();
+
+	public abstract Target getOpposite();
 }

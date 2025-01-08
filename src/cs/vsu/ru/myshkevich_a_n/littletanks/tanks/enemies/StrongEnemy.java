@@ -11,6 +11,7 @@ public class StrongEnemy extends Enemy {
 		this.setLife(1);
 		this.setArmor(3);
 		this.setCoreVelocity(1);
+		this.setCoreStrong(2);
 	}
 
 	@Override

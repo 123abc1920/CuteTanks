@@ -10,6 +10,7 @@ public class Core {
 	private boolean isAvailable = true;
 	private boolean fromEnemy = false;
 	private int velocity = 1;
+	private int strong = 1;
 
 	public Core(int row, int col, Target target, boolean fromEnemy, int velocity) {
 		this.target = target;
@@ -77,6 +78,14 @@ public class Core {
 
 	public boolean getFromEnemy() {
 		return this.fromEnemy;
+	}
+
+	public void setStrong(int strong) {
+		this.strong = strong;
+	}
+
+	public int getStrong() {
+		return strong;
 	}
 
 	public Symbol drawSymbol() {

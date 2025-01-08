@@ -1,6 +1,7 @@
 package cs.vsu.ru.myshkevich_a_n.littletanks.cells;
 
 import cs.vsu.ru.myshkevich_a_n.littletanks.Symbol;
+import cs.vsu.ru.myshkevich_a_n.littletanks.cores.Core;
 import cs.vsu.ru.myshkevich_a_n.littletanks.gameattrs.Global;
 
 public class Empty extends Cell {
@@ -15,7 +16,7 @@ public class Empty extends Cell {
 	}
 
 	@Override
-	public boolean setDestroy(boolean getFromEnemy) {
+	public boolean setDestroy(Core core) {
 		return false;
 	}
 

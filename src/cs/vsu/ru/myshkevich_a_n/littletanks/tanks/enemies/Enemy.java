@@ -1,6 +1,7 @@
 package cs.vsu.ru.myshkevich_a_n.littletanks.tanks.enemies;
 
 import cs.vsu.ru.myshkevich_a_n.littletanks.Symbol;
+import cs.vsu.ru.myshkevich_a_n.littletanks.cores.Core;
 import cs.vsu.ru.myshkevich_a_n.littletanks.gameattrs.Global;
 import cs.vsu.ru.myshkevich_a_n.littletanks.tanks.Tank;
 import cs.vsu.ru.myshkevich_a_n.littletanks.tanks.Target;
@@ -13,6 +14,7 @@ public class Enemy extends Tank {
 		this.setLife(1);
 		this.setArmor(0);
 		this.setCoreVelocity(1);
+		this.setCoreStrong(1);
 
 		this.setSymbolUp(Global.getUpEnemySymbol());
 		this.setSymbolDown(Global.getDownEnemySymbol());
@@ -26,13 +28,13 @@ public class Enemy extends Tank {
 	}
 
 	@Override
-	public boolean setDestroy(boolean getFromEnemy) {
-		if (!getFromEnemy) {
+	public boolean setDestroy(Core core) {
+		if (!core.getFromEnemy()) {
 			if (this.getArmor() >= 0) {
-				this.setArmor(this.getArmor() - 1);
+				this.setArmor(this.getArmor() - core.getStrong());
 				return true;
 			}
-			this.setLife(-1);
+			this.setLife(- core.getStrong());
 			if (this.getLife() <= 0) {
 				this.isKilled = true;
 			}

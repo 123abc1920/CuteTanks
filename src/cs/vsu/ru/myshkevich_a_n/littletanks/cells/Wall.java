@@ -1,9 +1,13 @@
 package cs.vsu.ru.myshkevich_a_n.littletanks.cells;
 
 import cs.vsu.ru.myshkevich_a_n.littletanks.Symbol;
+import cs.vsu.ru.myshkevich_a_n.littletanks.cores.Core;
 import cs.vsu.ru.myshkevich_a_n.littletanks.gameattrs.Global;
+import cs.vsu.ru.myshkevich_a_n.littletanks.tanks.Target;
 
 public class Wall extends Cell {
+	private String map = "####";
+
 	public Wall() {
 		this.setSymbol(Global.wallSymbol);
 		this.setAvailable(false);
@@ -28,11 +32,13 @@ public class Wall extends Cell {
 	}
 
 	@Override
-	public boolean setDestroy(boolean getFromEnemy) {
+	public boolean setDestroy(Core core) {
 		if (this.getLifes() <= 0) {
+			this.map = "";
 			return false;
 		}
-		this.setLifes(this.getLifes() - 1);
+		Target target = core.getTarget().getOpposite();
+		this.setLifes(this.getLifes() - core.getStrong());
 		return true;
 	}
 
@@ -46,8 +52,7 @@ public class Wall extends Cell {
 
 	@Override
 	public Symbol drawSymbol() {
-		String s = "#";
-		return new Symbol(s.repeat(getLifes()));
+		return new Symbol("#".repeat(getLifes()));
 	}
 
 }
